@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E5C77E"/>
+      <stop offset="50%" stop-color="#C9A35B"/>
+      <stop offset="100%" stop-color="#8A6F3A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Crown -->
+  <g stroke="url(#gold)" stroke-width="1.4" fill="none">
+    <path d="M60 38 L72 22 L84 38 L100 18 L116 38 L128 22 L140 38"/>
+    <circle cx="72" cy="22" r="2.4" fill="url(#gold)"/>
+    <circle cx="100" cy="18" r="3" fill="url(#gold)"/>
+    <circle cx="128" cy="22" r="2.4" fill="url(#gold)"/>
+    <path d="M58 40 L142 40"/>
+    <path d="M60 44 L140 44" stroke-width="0.8"/>
+  </g>
+
+  <!-- Shield -->
+  <path d="M50 56 L150 56 L150 130 Q150 175 100 200 Q50 175 50 130 Z"
+        fill="none" stroke="url(#gold)" stroke-width="1.6"/>
+  <path d="M55 60 L145 60 L145 130 Q145 172 100 195 Q55 172 55 130 Z"
+        fill="none" stroke="url(#gold)" stroke-width="0.6" opacity="0.5"/>
+
+  <!-- Monogram FFC -->
+  <text x="100" y="125" text-anchor="middle"
+        font-family="Cinzel, 'Cormorant Garamond', serif"
+        font-size="42" font-weight="600"
+        fill="url(#gold)" letter-spacing="1">FFC</text>
+
+  <!-- Banner / motto strip -->
+  <path d="M40 160 Q100 175 160 160 L160 168 Q100 183 40 168 Z"
+        fill="none" stroke="url(#gold)" stroke-width="0.7" opacity="0.6"/>
+  <text x="100" y="170" text-anchor="middle"
+        font-family="Cinzel, serif" font-size="6"
+        fill="url(#gold)" letter-spacing="3" opacity="0.85">EST · MMXXVI</text>
+
+  <!-- Laurel branches -->
+  <g stroke="url(#gold)" stroke-width="0.9" fill="none" opacity="0.85">
+    <!-- left -->
+    <path d="M40 110 Q28 130 38 165"/>
+    <path d="M36 118 Q26 122 30 128"/>
+    <path d="M32 130 Q22 134 26 140"/>
+    <path d="M30 144 Q22 148 26 154"/>
+    <path d="M32 158 Q24 162 30 168"/>
+    <!-- right -->
+    <path d="M160 110 Q172 130 162 165"/>
+    <path d="M164 118 Q174 122 170 128"/>
+    <path d="M168 130 Q178 134 174 140"/>
+    <path d="M170 144 Q178 148 174 154"/>
+    <path d="M168 158 Q176 162 170 168"/>
+  </g>
+</svg>
