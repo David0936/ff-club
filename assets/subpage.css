@@ -160,3 +160,90 @@
   letter-spacing: 0.2em;
   color: var(--bone-3);
 }
+
+/* ===== Public Article cards ===== */
+.article-card { cursor: pointer; }
+.art-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.art-tags span {
+  font-family: var(--font-sans);
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--gold-2);
+  border: 1px solid var(--line);
+  padding: 2px 8px; border-radius: 2px;
+}
+.art-title {
+  display: block;
+  font-family: var(--font-cn);
+  font-size: 18px; line-height: 1.4;
+  color: var(--bone);
+  margin-bottom: 10px;
+}
+.art-readmore {
+  margin-top: 16px;
+  color: var(--gold);
+  font-size: 13px; letter-spacing: 0.1em;
+}
+
+/* ===== Article reading modal ===== */
+.article-modal { max-width: 760px; text-align: left; }
+.art-doc-title {
+  font-family: var(--font-cn);
+  font-size: clamp(24px, 4vw, 34px);
+  color: var(--bone); margin: 14px 0 8px; line-height: 1.3;
+}
+.art-doc-meta { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.15em; color: var(--bone-3); }
+.art-doc-content { font-family: var(--font-serif); font-size: 17px; line-height: 1.85; color: var(--bone); }
+.art-doc-content h2 { font-family: var(--font-cn); font-size: 22px; color: var(--gold-2); margin: 32px 0 14px; }
+.art-doc-content h3 { font-family: var(--font-cn); font-size: 19px; color: var(--bone); margin: 26px 0 12px; }
+.art-doc-content h4 { font-family: var(--font-cn); font-size: 16px; color: var(--bone-2); margin: 20px 0 10px; }
+.art-doc-content p { margin: 0 0 16px; }
+.art-doc-content ul, .art-doc-content ol { margin: 0 0 16px; padding-left: 22px; }
+.art-doc-content li { margin-bottom: 8px; }
+.art-doc-content a { color: var(--gold-2); border-bottom: 1px solid var(--line); }
+.art-doc-content blockquote {
+  border-left: 2px solid var(--gold); margin: 0 0 18px;
+  padding: 6px 0 6px 18px; color: var(--bone-2); font-style: italic;
+}
+.art-doc-content code { background: var(--ink-3); padding: 1px 6px; border-radius: 3px; font-size: 0.9em; color: var(--gold-2); }
+.art-doc-content pre { background: var(--ink-3); padding: 16px; border-radius: 4px; overflow-x: auto; margin: 0 0 18px; }
+.art-doc-content pre code { background: none; padding: 0; color: var(--bone); }
+.art-doc-content hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+.art-doc-content .art-callout {
+  background: var(--ink-3); border: 1px solid var(--line);
+  padding: 14px 18px; border-radius: 4px; margin: 0 0 18px;
+  font-style: normal; color: var(--bone-2); font-size: 15px;
+}
+.art-doc-content .art-table { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 15px; }
+.art-doc-content .art-table th, .art-doc-content .art-table td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; }
+.art-doc-content .art-table th { color: var(--gold-2); }
+.art-doc-content figure { margin: 0 0 18px; }
+.art-doc-content figure img { width: 100%; border-radius: 4px; }
+.art-doc-content figcaption { font-size: 13px; color: var(--bone-3); text-align: center; margin-top: 6px; }
+
+/* ===== Gated research report teasers ===== */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.report-card {
+  position: relative;
+  display: block;
+  background: linear-gradient(180deg, var(--ink-2), var(--ink));
+  border: 1px solid var(--gold-3);
+  padding: 28px 24px;
+  text-decoration: none;
+  transition: all .3s ease;
+  overflow: hidden;
+}
+.report-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 9px, rgba(201,163,91,0.03) 9px, rgba(201,163,91,0.03) 18px);
+  pointer-events: none;
+}
+.report-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,0.5); }
+.report-lock { position: absolute; top: 18px; right: 20px; font-size: 18px; opacity: 0.8; }
+.report-title { font-family: var(--font-cn); font-size: 19px; color: var(--bone); margin: 4px 0 12px; line-height: 1.4; }
+.report-summary { font-family: var(--font-serif); font-size: 15px; color: var(--bone-2); line-height: 1.7; margin: 0 0 14px; }
+.report-tickers { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.1em; color: var(--gold-2); margin-bottom: 14px; }
+.report-cta { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.12em; color: var(--gold); padding-top: 14px; border-top: 1px solid var(--line-2); }

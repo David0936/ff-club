@@ -458,39 +458,49 @@
       <a href="#home" class="back-link">← 返回首页</a>
     </div>
   </section>
-  <section>
+  <section style="padding-top:60px;">
     <div class="container">
-      <div class="placeholder-block">
-        <div class="seal">DRAFT</div>
-        <h3>建议接入 Notion 作为内容后台</h3>
-        <p>飞书也可，但 Notion 的 Database + 公开页面 + API 同步更适合做"作者署名 · 标签筛选 · 阅读体验"。<br/>方案确认后我会接上：</p>
-        <ul class="checklist">
-          <li>Notion Database → 公开链接 / 自托管渲染</li>
-          <li>按作者、标签（投资 / AI / Web3 / 创业）筛选</li>
-          <li>长文阅读页 + 短文流瀑布</li>
-          <li>RSS 订阅出口</li>
-        </ul>
+      <div style="text-align:center;">
+        <div class="section-eyebrow">Free Reads</div>
+        <h2 class="section-title">公开科普</h2>
+        <p class="section-sub" style="margin:0 auto 40px;">开卡 · 入门 · 工具 — 免费阅读，无需入会</p>
       </div>
-      <div class="feed-grid">
-        <div class="feed-card">
-          <div class="author"><div class="avatar">ES</div><div><div class="name">Eason</div><div class="handle">美股 · 基本面</div></div></div>
-          <div class="content"><strong style="color:var(--gold);font-family:var(--font-cn);font-size:17px;display:block;margin-bottom:6px;">英伟达的护城河，正在被谁悄悄填平</strong>占位摘要 — 一篇关于 AI 算力链条上下游的深度复盘…</div>
-          <div class="meta">2026 · 5 · 20　·　8 分钟阅读</div>
-        </div>
-        <div class="feed-card">
-          <div class="author"><div class="avatar">SK</div><div><div class="name">Sky G.cph</div><div class="handle">区块链 · AI</div></div></div>
-          <div class="content"><strong style="color:var(--gold);font-family:var(--font-cn);font-size:17px;display:block;margin-bottom:6px;">当 AI Agent 跑在链上：Cypherium 的设计取舍</strong>占位摘要 — 从共识层到执行层的技术决策…</div>
-          <div class="meta">2026 · 5 · 18　·　12 分钟阅读</div>
-        </div>
-        <div class="feed-card">
-          <div class="author"><div class="avatar">FR</div><div><div class="name">Franco 哥哥</div><div class="handle">财税 · 跨境</div></div></div>
-          <div class="content"><strong style="color:var(--gold);font-family:var(--font-cn);font-size:17px;display:block;margin-bottom:6px;">高净值身份规划：2026 年最值得布局的三条路径</strong>占位摘要 — CRS / FATCA 之后的真实选择…</div>
-          <div class="meta">2026 · 5 · 15　·　15 分钟阅读</div>
-        </div>
+      <div class="feed-grid" id="articles-grid"></div>
+      <div id="articles-empty" class="placeholder-block" style="display:none;">
+        <div class="seal">SOON</div>
+        <h3>公开文章即将上线</h3>
+        <p>在 Notion「📰 公开科普文章」里勾选「上网站」，第二天自动出现在这里。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="connections-section" style="padding-top:40px;">
+    <div class="container">
+      <div style="text-align:center;">
+        <div class="section-eyebrow">Members Only</div>
+        <h2 class="section-title">会员研报</h2>
+        <p class="section-sub" style="margin:0 auto 40px;">深度研报仅对会员开放 · 点击进入社区查看全文</p>
+      </div>
+      <div class="reports-grid" id="reports-grid"></div>
+      <div id="reports-empty" class="placeholder-block" style="display:none;">
+        <div class="seal">LOCKED</div>
+        <h3>会员研报陆续上线</h3>
+        <p>在 Notion「🔒 会员研报」里勾选「上网站」，标题与摘要会作为钩子展示在这里。</p>
+      </div>
+      <div style="text-align:center;margin-top:40px;">
+        <button class="btn-gold" data-apply>申请加入 · 解锁全部研报</button>
       </div>
     </div>
   </section>
 </div><!-- /VIEW: ARTICLES -->
+
+<!-- ARTICLE READER MODAL -->
+<div class="modal-backdrop" id="article-modal">
+  <div class="modal article-modal">
+    <button class="modal-close" id="article-close" aria-label="close">×</button>
+    <div id="article-body"></div>
+  </div>
+</div>
 
 
 <!-- ============ FOOTER (shared) ============ -->
@@ -534,6 +544,7 @@
   </p>
 </div>
 
+<script src="assets/notion-data.js"></script>
 <script src="assets/data.js"></script>
 <script src="assets/app.js"></script>
 <script>

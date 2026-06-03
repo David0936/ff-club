@@ -13,6 +13,108 @@ const initials = (name, en) => {
   return name.charAt(0);
 };
 
+/* ---------- Merge Notion-synced data (overrides data.js when present) ---------- */
+function applyNotionData() {
+  const N = window.FFC_NOTION;
+  if (!N) return;
+  // 成员/发起人：Notion 有数据时优先用 Notion（保证隐私字段已在脚本侧过滤）
+  if (Array.isArray(N.founders) && N.founders.length) {
+    window.FFC_FOUNDERS = N.founders.map(normalizeNotionMember);
+  }
+  if (Array.isArray(N.members) && N.members.length) {
+    window.FFC_MEMBERS = N.members.map(normalizeNotionMember);
+  }
+  if (Array.isArray(N.keywords) && N.keywords.length) {
+    window.FFC_KEYWORDS = N.keywords;
+  }
+}
+function normalizeNotionMember(m) {
+  return {
+    id: m.id,
+    name: m.name,
+    en: m.en || '',
+    title: m.title || (m.fields || []).join(' · '),
+    avatar: m.avatar || '',
+    socials: m.socials || {},
+  };
+}
+
+/* ---------- Render: Public Articles (from Notion) ---------- */
+function renderArticles() {
+  const grid = $('#articles-grid');
+  const empty = $('#articles-empty');
+  if (!grid) return;
+  const articles = (window.FFC_NOTION?.articles) || [];
+  if (!articles.length) { if (empty) empty.style.display = 'block'; return; }
+  if (empty) empty.style.display = 'none';
+  grid.innerHTML = '';
+  articles.forEach(a => {
+    const card = document.createElement('div');
+    card.className = 'feed-card article-card';
+    card.innerHTML = `
+      <div class="art-tags">${(a.category || []).map(c => `<span>${c}</span>`).join('')}</div>
+      <strong class="art-title">${a.title}</strong>
+      <div class="content">${a.summary || ''}</div>
+      <div class="meta">${a.author || 'FFC'}　·　${a.date || ''}</div>
+      <div class="art-readmore">阅读全文 →</div>
+    `;
+    card.addEventListener('click', () => openArticle(a));
+    grid.appendChild(card);
+  });
+}
+
+function openArticle(a) {
+  const backdrop = $('#article-modal');
+  const body = $('#article-body');
+  if (!backdrop || !body) return;
+  body.innerHTML = `
+    <div class="art-tags">${(a.category || []).map(c => `<span>${c}</span>`).join('')}</div>
+    <h2 class="art-doc-title">${a.title}</h2>
+    <div class="art-doc-meta">${a.author || 'FFC'}　·　${a.date || ''}</div>
+    <hr/>
+    <div class="art-doc-content">${a.html || '<p>正文加载中…</p>'}</div>
+  `;
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+/* ---------- Render: Gated Research Reports (teasers) ---------- */
+function renderReports() {
+  const grid = $('#reports-grid');
+  const empty = $('#reports-empty');
+  if (!grid) return;
+  const reports = (window.FFC_NOTION?.reports) || [];
+  if (!reports.length) { if (empty) empty.style.display = 'block'; return; }
+  if (empty) empty.style.display = 'none';
+  grid.innerHTML = '';
+  reports.forEach(r => {
+    const card = document.createElement('a');
+    card.className = 'report-card';
+    card.href = r.communityUrl || '#';
+    card.target = '_blank';
+    card.rel = 'noopener';
+    card.innerHTML = `
+      <div class="report-lock">🔒</div>
+      <div class="art-tags">${(r.category || []).map(c => `<span>${c}</span>`).join('')}</div>
+      <h4 class="report-title">${r.title}</h4>
+      <p class="report-summary">${r.summary || ''}</p>
+      ${r.tickers ? `<div class="report-tickers">${r.tickers}</div>` : ''}
+      <div class="report-cta">会员专享 · 进入社区查看全文 →</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function initArticleModal() {
+  const backdrop = $('#article-modal');
+  const close = $('#article-close');
+  if (!backdrop) return;
+  const doClose = () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; };
+  close?.addEventListener('click', doClose);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) doClose(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') doClose(); });
+}
+
 /* ---------- Render: Orbital Network ---------- */
 function renderNetwork() {
   const stage = $('#network-stage');
@@ -530,6 +632,7 @@ function initScrollEffects() {
 
 /* ---------- Boot ---------- */
 document.addEventListener('DOMContentLoaded', () => {
+  applyNotionData();   // 先用 Notion 同步数据覆盖（若有）
   renderNetwork();
   renderFounders();
   renderMembers();
@@ -537,8 +640,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderConnections();
   renderQuickNav();
   renderPricing();
+  renderArticles();
+  renderReports();
   initAdmin();
   initApplyModal();
+  initArticleModal();
   initFaq();
   initMobileNav();
   initScrollEffects();
