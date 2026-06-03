@@ -14,8 +14,8 @@ window.FFC_PRICING = {
   notes: '加入即享一年期会员资格 · 终身校友通讯录'
 };
 
-/* ---------- 飞书问卷链接（拿到后替换） ---------- */
-window.FFC_FORM_URL = '';   // 例如: 'https://yourdomain.feishu.cn/share/base/form/shrcn...'
+/* ---------- 申请问卷链接（Notion 发布表单） ---------- */
+window.FFC_FORM_URL = 'https://rocky-knife-e8a.notion.site/ff-club?v=37335de23c6e81e2b4cb000c8d0ee8a7';
 
 /* ---------- 联合发起人 ---------- */
 window.FFC_FOUNDERS = [
