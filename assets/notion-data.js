@@ -1,9 +1,368 @@
 /* 自动生成 · 请勿手改 · 由 scripts/sync-notion.mjs 同步自 Notion */
 window.FFC_NOTION = {
   "syncedAt": "2026-06-03",
-  "founders": [],
-  "members": [],
-  "keywords": [],
+  "founders": [
+    {
+      "id": "37435de2",
+      "name": "王宇 William",
+      "en": "William",
+      "title": "宇海科技创始人 · Crypto Trader",
+      "fields": [
+        "Crypto / Web3",
+        "创业"
+      ],
+      "level": "联合发起人",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "Eason",
+      "en": "Eason",
+      "title": "美股私募基本面分析师 · 管理九位数资产",
+      "fields": [
+        "美股",
+        "一级市场"
+      ],
+      "level": "联合发起人",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "Franco 哥哥",
+      "en": "Franco",
+      "title": "美国 CPA 财税事务所创始人 · 20W 粉商业博主",
+      "fields": [
+        "财税 / 身份规划",
+        "创业",
+        "出海",
+        "内容创作"
+      ],
+      "level": "联合发起人",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "王德尔 Dax",
+      "en": "Dax",
+      "title": "全网 50 万粉丝 · 自由投资人",
+      "fields": [
+        "美股",
+        "一级市场",
+        "内容创作"
+      ],
+      "level": "联合发起人",
+      "avatar": "",
+      "socials": {}
+    }
+  ],
+  "members": [
+    {
+      "id": "37435de2",
+      "name": "张德楷",
+      "en": "Dekai",
+      "title": "猎人量化创始人 · 量化交易研究者",
+      "fields": [
+        "美股",
+        "一级市场"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "韩沛好",
+      "en": "Han Peihao",
+      "title": "东非女企业家 · 多家品牌创始人",
+      "fields": [
+        "创业",
+        "出海"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "狗哥",
+      "en": "Gouge",
+      "title": "海金之路创始人 · 商业 IP 操盘手",
+      "fields": [
+        "商业 IP",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "伟哥",
+      "en": "Wei",
+      "title": "头部医美 MCN 创始人 · 连续创业者",
+      "fields": [
+        "创业",
+        "内容创作",
+        "商业 IP"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "David",
+      "en": "David",
+      "title": "小鱼 AI Agent 创业者 · AI 应用探索者",
+      "fields": [
+        "AI",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "Sky G.cph",
+      "en": "Sky",
+      "title": "区块链 AI 创业者 · Cypherium 项目创始人",
+      "fields": [
+        "Crypto / Web3",
+        "AI",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "冯晨",
+      "en": "Fengchen",
+      "title": "河南工美集团联合创始人 · 产业投资人",
+      "fields": [
+        "一级市场",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "李少侠",
+      "en": "Li Shaoxia",
+      "title": "御众集团创始人 · 投资人",
+      "fields": [
+        "一级市场",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "Jason You",
+      "en": "Jason You",
+      "title": "00 后硅谷 AI 创业者 · Skylow Co-founder",
+      "fields": [
+        "AI",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "奶奶小小",
+      "en": "Naixx",
+      "title": "硅谷 AI 创业者 · VC / AI Agent Explorer",
+      "fields": [
+        "AI",
+        "一级市场",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "三亿",
+      "en": "Sanyi",
+      "title": "Capital 前华语负责人 · Canton 中文区核心建设者",
+      "fields": [
+        "Crypto / Web3"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "LeonG",
+      "en": "LeonG",
+      "title": "男性成长赛道头部 · 自由投资人",
+      "fields": [
+        "内容创作",
+        "美股"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "尤可欣 Isadora",
+      "en": "Isadora",
+      "title": "平台 9W 粉丝 Web3 KOL · BNB / OKE 合作伙伴 · Web3 投资人",
+      "fields": [
+        "Crypto / Web3",
+        "内容创作"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "鲍总",
+      "en": "Bao",
+      "title": "万宠联盟创始人 · 宠物产业创业者",
+      "fields": [
+        "创业",
+        "商业 IP"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "赵撑伞",
+      "en": "Zhao",
+      "title": "100W 粉丝商业博主 · 创业内容创作者",
+      "fields": [
+        "创业",
+        "内容创作",
+        "商业 IP"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "Isaac Zhang",
+      "en": "Isaac",
+      "title": "Founder of Stealth AI-Web3 Startup · AI & Web3 Builder",
+      "fields": [
+        "AI",
+        "Crypto / Web3",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "Rain.Rain.Yang",
+      "en": "Rain Yang",
+      "title": "全网 50W 粉 · AI 产品经理 · 高奢女装品牌创始人",
+      "fields": [
+        "AI",
+        "内容创作",
+        "创业"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "貂蝉不馋",
+      "en": "Diaochan",
+      "title": "全网 200W 粉内容博主 · 新媒体 IP 创作者",
+      "fields": [
+        "内容创作",
+        "商业 IP"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "润总",
+      "en": "Run",
+      "title": "00 后创业者 · 财富自由实践者",
+      "fields": [
+        "创业",
+        "内容创作"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    },
+    {
+      "id": "37435de2",
+      "name": "嗯哼",
+      "en": "EnHeng",
+      "title": "05 后最年轻 A9 · 币圈 KOL",
+      "fields": [
+        "Crypto / Web3",
+        "内容创作"
+      ],
+      "level": "核心成员",
+      "avatar": "",
+      "socials": {}
+    }
+  ],
+  "keywords": [
+    {
+      "word": "创业",
+      "w": 10
+    },
+    {
+      "word": "内容创作",
+      "w": 6
+    },
+    {
+      "word": "一级市场",
+      "w": 4
+    },
+    {
+      "word": "Crypto / Web3",
+      "w": 4
+    },
+    {
+      "word": "AI",
+      "w": 4
+    },
+    {
+      "word": "美股",
+      "w": 3
+    },
+    {
+      "word": "商业 IP",
+      "w": 3
+    },
+    {
+      "word": "出海",
+      "w": 2
+    },
+    {
+      "word": "财税 / 身份规划",
+      "w": 2
+    }
+  ],
   "articles": [
     {
       "id": "37435de23c6e",
