@@ -15,3 +15,7 @@ e4ee7e2bc9e1c73e7980852328a76927.jpg
 # Logs / temp
 *.log
 *.tmp
+
+# 研报 PDF（保留本地/Notion，不进公开网站仓库）
+研报pdf/
+*.pdf
