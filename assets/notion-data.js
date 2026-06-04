@@ -335,15 +335,15 @@ window.FFC_NOTION = {
       "w": 6
     },
     {
+      "word": "AI",
+      "w": 4
+    },
+    {
       "word": "一级市场",
       "w": 4
     },
     {
       "word": "Crypto / Web3",
-      "w": 4
-    },
-    {
-      "word": "AI",
       "w": 4
     },
     {
@@ -353,6 +353,10 @@ window.FFC_NOTION = {
     {
       "word": "商业 IP",
       "w": 3
+    },
+    {
+      "word": "A股",
+      "w": 2
     },
     {
       "word": "出海",
@@ -487,5 +491,6 @@ window.FFC_NOTION = {
       "date": "2025-10-22",
       "communityUrl": "https://ff-club-2026.netlify.app"
     }
-  ]
+  ],
+  "connections": []
 };
