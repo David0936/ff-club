@@ -459,12 +459,25 @@ function initApplyModal() {
     backdrop.classList.add('open');
     const iframe = $('#apply-iframe');
     const fallback = $('#apply-fallback');
+    // Notion.site 拒绝被 iframe 嵌入，改为新标签页打开问卷
+    if (iframe) iframe.style.display = 'none';
     if (window.FFC_FORM_URL) {
-      iframe.src = window.FFC_FORM_URL;
-      iframe.style.display = 'block';
-      fallback.style.display = 'none';
+      fallback.style.display = 'block';
+      fallback.innerHTML = `
+        <p style="font-family:var(--font-serif);font-size:17px;color:var(--bone-2);margin-bottom:8px;">
+          点击下方按钮，进入申请问卷
+        </p>
+        <p style="font-size:13px;color:var(--bone-3);margin-bottom:28px;letter-spacing:0.05em;">
+          认真填写 · 4 位联合发起人将于 48 小时内审阅回复
+        </p>
+        <a href="${window.FFC_FORM_URL}" target="_blank" rel="noopener"
+           class="btn-gold" style="display:inline-block;text-decoration:none;">
+          前往填写申请问卷 ↗
+        </a>
+        <p style="font-size:12px;color:var(--bone-3);margin-top:24px;">
+          问卷将在新标签页打开（Notion 表单）
+        </p>`;
     } else {
-      iframe.style.display = 'none';
       fallback.style.display = 'block';
     }
     document.body.style.overflow = 'hidden';
