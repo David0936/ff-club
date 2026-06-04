@@ -1,6 +1,6 @@
 /* 自动生成 · 请勿手改 · 由 scripts/sync-notion.mjs 同步自 Notion */
 window.FFC_NOTION = {
-  "syncedAt": "2026-06-03",
+  "syncedAt": "2026-06-04",
   "founders": [
     {
       "id": "37435de2",
@@ -365,6 +365,18 @@ window.FFC_NOTION = {
   ],
   "articles": [
     {
+      "id": "37535de23c6e",
+      "title": "孙宇晨《财富自由革命之路》访谈逐字稿（155 篇全集）",
+      "summary": "波场 TRON 创始人孙宇晨喜马拉雅节目全 155 篇逐字稿。马东、冯仑推荐，90 后视角谈车房工作与财务自由的“三观革命”。",
+      "category": [
+        "人物传记"
+      ],
+      "author": "孙宇晨",
+      "date": "2026-06-04",
+      "cover": "",
+      "html": "<blockquote>本文为公开内容 · 人物访谈合集，仅供学习参考，不构成投资建议。</blockquote><h3>关于这份逐字稿</h3><p>孙宇晨，波场 TRON 创始人。90 后，读书出国、投资创业，年轻时实现财务自由。这是他在喜马拉雅节目《财富自由革命之路》的全 <strong>155 篇逐字稿</strong>汇编。</p><h3>为什么值得读</h3><ul><li><strong>马东推荐</strong>：“他的观点是一场三观革命，用年轻人的想法直接回应当下中国人最关心的车房工作。”</li><li><strong>冯仑推荐</strong>：“他很乐意把创业想法、独立人格和自由价值观跟大家分享。”</li></ul><h3>阅读方式</h3><p>完整 155 篇逐字稿 PDF 附在下方（点击可翻页阅读 / 下载）。建议从第 001 篇顺序读起。</p><hr/><blockquote>📎 <strong>PDF 位置</strong>：把《孙宇晨访谈逐字稿155篇.pdf」拖到这条分隔线下方。</blockquote>"
+    },
+    {
       "id": "37435de23c6e",
       "title": "新手开美股账户：3 家主流券商对比与开户指南",
       "summary": "忌龚 / 盈动 / 老虎怎么选？从入门门槛、出入金到报税，一文看明白。",
@@ -379,6 +391,18 @@ window.FFC_NOTION = {
     }
   ],
   "reports": [
+    {
+      "id": "37535de23c6e",
+      "title": "Hardy 的 AI → 下一轮超级周期观察清单",
+      "summary": "三大主线全标的清单：AI 基础设施（算力/HBM/网络/服务器/晶圆/设备）+ 电力超级周期（供电/发电/核能/冷却）+ AI 软件层。跳过个股看赛道全谱。",
+      "category": [
+        "赛道深度",
+        "美股研报"
+      ],
+      "tickers": "NVDA·MU·AVGO·MRVL·VRT·CEG·OKLO",
+      "date": "2026-06-03",
+      "communityUrl": "https://ff-club-2026.netlify.app"
+    },
     {
       "id": "37435de23c6e",
       "title": "腾讯重估：AI + 游戏双轮，被低估的现金牛",
@@ -401,6 +425,66 @@ window.FFC_NOTION = {
       ],
       "tickers": "NVDA · AVGO · VRT",
       "date": "2026-06-03",
+      "communityUrl": "https://ff-club-2026.netlify.app"
+    },
+    {
+      "id": "37535de23c6e",
+      "title": "Marvell：为什么本届 COMPUTEX 是重大利好（多头视角）",
+      "summary": "CEO Matt Murphy 亲登 Keynote《The Future of AI Scaling Depends on Connectivity》，直击 AI “传得不够快”痛点；光互连/铜缆/定制 ASIC 几乎无可替代的卡位。",
+      "category": [
+        "个股深度",
+        "美股研报"
+      ],
+      "tickers": "MRVL",
+      "date": "2026-06-02",
+      "communityUrl": "https://ff-club-2026.netlify.app"
+    },
+    {
+      "id": "37535de23c6e",
+      "title": "MRVL 重新解读：估值已透支 · 期望值仅 +9%（谨慎/空头视角）",
+      "summary": "不是卖方推荐。基于公开数据+概率思维的严肃买家框架。当前 $164.5、市值 ~$143B；四层兑现+关键价位+安全边际，与 Broadcom 的不对称竞争决定估值上限。",
+      "category": [
+        "个股深度",
+        "美股研报"
+      ],
+      "tickers": "MRVL",
+      "date": "2026-05-21",
+      "communityUrl": "https://ff-club-2026.netlify.app"
+    },
+    {
+      "id": "37535de23c6e",
+      "title": "CBRS 深度研究报告（Tradingtime）",
+      "summary": "CBRS 赛道深度研究。（原件为 Word 文档，建议转 PDF 后上传；要点待补充）",
+      "category": [
+        "个股深度",
+        "美股研报"
+      ],
+      "tickers": "CBRS",
+      "date": "2026-05-14",
+      "communityUrl": "https://ff-club-2026.netlify.app"
+    },
+    {
+      "id": "37535de23c6e",
+      "title": "全球存储行业研究报告（专业版）：AI 数据中心驱动的超级周期",
+      "summary": "13 个月真实涨幅复盘 + 本轮周期七阶段划分 + NAND/HBM 深度专题 + 供需量化 + 估值框架。数据截至 2026/5/8，来源 Bloomberg/TrendForce/Counterpoint。",
+      "category": [
+        "赛道深度",
+        "美股研报"
+      ],
+      "tickers": "MU · 三星 · SK海力士",
+      "date": "2026-05-09",
+      "communityUrl": "https://ff-club-2026.netlify.app"
+    },
+    {
+      "id": "37535de23c6e",
+      "title": "存储调研：AI 如何拉动 SSD 需求 — 聚焦美光/闪迪/AMD",
+      "summary": "北美数据中心存储介质比例拆解（10 万台服务器怎么分）、AI 推理/训练对 SSD 的真实拉动、全球供需与价格走势。6867 字专家纪要。",
+      "category": [
+        "赛道深度",
+        "美股研报"
+      ],
+      "tickers": "MU · SNDK · AMD",
+      "date": "2025-10-22",
       "communityUrl": "https://ff-club-2026.netlify.app"
     }
   ]
