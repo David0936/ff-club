@@ -704,6 +704,29 @@ function initRouter() {
   handleRoute();
 }
 
+/* ---------- Builder（David 小鱼）联系方式弹窗 ---------- */
+function initBuilderModal() {
+  const backdrop = $('#builder-modal');
+  if (!backdrop) return;
+  const open = () => { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  const close = () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; };
+  $('#builder-avatar')?.addEventListener('click', open);
+  $('#builder-contact-btn')?.addEventListener('click', open);
+  $('#builder-close')?.addEventListener('click', close);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  // 复制微信号/公众号
+  $$('#builder-modal [data-copy]').forEach(el => {
+    el.addEventListener('click', () => {
+      const text = el.getAttribute('data-copy');
+      navigator.clipboard?.writeText(text).then(() => {
+        const act = el.querySelector('.bl-act');
+        if (act) { const old = act.textContent; act.textContent = '已复制 ✓'; setTimeout(() => act.textContent = old, 1500); }
+      }).catch(() => {});
+    });
+  });
+}
+
 /* ---------- Scroll Effects ---------- */
 function initScrollEffects() {
   const nav = $('#nav');
@@ -736,6 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAdmin();
   initApplyModal();
   initArticleModal();
+  initBuilderModal();
   initFaq();
   initMobileNav();
   initScrollEffects();

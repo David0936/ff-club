@@ -215,10 +215,15 @@ async function main() {
   mkdirSync(CONN_DIR, { recursive: true });
   const connections = [];
   for (const p of memberPages) {
-    if (!getCheck(p, '合影上墙')) continue;
+    if (!getCheck(p, '合影已审核')) continue;
     const level = getSelect(p, '等级');
     if (level === '已离开' || level === '申请中') continue;
-    const urls = getAllFileUrls(p, '名人合影');
+    // 三个合影字段全部合并
+    const urls = [
+      ...getAllFileUrls(p, '名人合影'),
+      ...getAllFileUrls(p, '名人合影2'),
+      ...getAllFileUrls(p, '名人合影3'),
+    ];
     if (!urls.length) continue;
     const name = getTitle(p, '姓名');
     const id = p.id.replace(/-/g, '').slice(0, 8);
