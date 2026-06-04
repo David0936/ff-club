@@ -29,7 +29,7 @@ jobs:
         run: |
           git config user.name  "FFC Sync Bot"
           git config user.email "actions@github.com"
-          git add assets/notion-data.js
+          git add assets/notion-data.js assets/connections
           if git diff --staged --quiet; then
             echo "无变化，跳过提交"
           else

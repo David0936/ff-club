@@ -319,35 +319,113 @@ function renderKeywords() {
 function renderConnections() {
   const grid = $('#connections-grid');
   if (!grid) return;
-  const items = window.FFC_CONNECTIONS.length ? window.FFC_CONNECTIONS : [];
+  grid.innerHTML = '';
+
+  // 优先用 Notion 同步来的真实合影
+  const real = (window.FFC_NOTION?.connections) || [];
+  if (real.length) {
+    real.forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'connection-card photo';
+      const img = document.createElement('img');
+      img.src = c.featured; img.alt = (c.uploader || '') + ' 的合影';
+      img.loading = 'lazy';
+      card.appendChild(img);
+      // 角标：上传者昵称
+      const tag = document.createElement('div');
+      tag.className = 'conn-uploader';
+      tag.textContent = '@ ' + (c.uploader || '匿名');
+      card.appendChild(tag);
+      if (c.caption) {
+        const cap = document.createElement('div');
+        cap.className = 'conn-caption';
+        cap.textContent = c.caption;
+        card.appendChild(cap);
+      }
+      if ((c.photos || []).length > 1) {
+        const cnt = document.createElement('div');
+        cnt.className = 'conn-count';
+        cnt.textContent = '🖼 ' + c.photos.length;
+        card.appendChild(cnt);
+      }
+      card.addEventListener('click', () => openLightbox(c, 0));
+      grid.appendChild(card);
+    });
+    return;
+  }
+
+  // 没有真实合影时 → 占位（待成员上传）
+  const items = (window.FFC_CONNECTIONS && window.FFC_CONNECTIONS.length) ? window.FFC_CONNECTIONS : [];
   const total = Math.max(items.length, 8);
   for (let i = 0; i < total; i++) {
     const c = items[i];
     const card = document.createElement('div');
-    card.className = 'connection-card' + (c?.img ? '' : ' placeholder');
-    if (c?.img) {
-      const img = document.createElement('img');
-      img.src = c.img; img.alt = c.label;
-      img.style.width = '100%'; img.style.height = '120px'; img.style.objectFit = 'cover';
-      card.appendChild(img);
-      const label = document.createElement('div');
-      label.className = 'label';
-      label.textContent = c.label;
-      card.appendChild(label);
-    } else {
-      const seal = document.createElement('div');
-      seal.className = 'seal';
-      seal.textContent = c?.tier?.slice(0,3).toUpperCase() || 'TBD';
-      const label = document.createElement('div');
-      label.className = 'label';
-      label.textContent = c?.label || '待发布';
-      const hint = document.createElement('div');
-      hint.className = 'hint';
-      hint.textContent = c?.hint || '合影 / 截图素材整理中';
-      card.append(seal, label, hint);
-    }
+    card.className = 'connection-card placeholder';
+    const seal = document.createElement('div');
+    seal.className = 'seal';
+    seal.textContent = c?.tier?.slice(0, 3).toUpperCase() || 'TBD';
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = c?.label || '待发布';
+    const hint = document.createElement('div');
+    hint.className = 'hint';
+    hint.textContent = c?.hint || '成员合影上传中';
+    card.append(seal, label, hint);
     grid.appendChild(card);
   }
+}
+
+/* ---------- 合影灯箱（可左右滑看同一人全部照片） ---------- */
+function openLightbox(conn, startIdx) {
+  let idx = startIdx || 0;
+  const photos = conn.photos || [conn.featured];
+  let box = $('#conn-lightbox');
+  if (!box) {
+    box = document.createElement('div');
+    box.id = 'conn-lightbox';
+    box.className = 'conn-lightbox';
+    box.innerHTML = `
+      <button class="lb-close" aria-label="close">×</button>
+      <button class="lb-prev" aria-label="prev">‹</button>
+      <img class="lb-img" alt="" />
+      <button class="lb-next" aria-label="next">›</button>
+      <div class="lb-meta"><span class="lb-uploader"></span><span class="lb-caption"></span><span class="lb-idx"></span></div>`;
+    document.body.appendChild(box);
+  }
+  const imgEl = box.querySelector('.lb-img');
+  const show = () => {
+    imgEl.src = photos[idx];
+    box.querySelector('.lb-uploader').textContent = '@ ' + (conn.uploader || '匿名');
+    box.querySelector('.lb-caption').textContent = conn.caption ? ' · ' + conn.caption : '';
+    box.querySelector('.lb-idx').textContent = `  ${idx + 1}/${photos.length}`;
+    box.querySelector('.lb-prev').style.visibility = photos.length > 1 ? 'visible' : 'hidden';
+    box.querySelector('.lb-next').style.visibility = photos.length > 1 ? 'visible' : 'hidden';
+  };
+  const prev = () => { idx = (idx - 1 + photos.length) % photos.length; show(); };
+  const next = () => { idx = (idx + 1) % photos.length; show(); };
+  const close = () => { box.classList.remove('open'); document.body.style.overflow = ''; };
+  box.querySelector('.lb-prev').onclick = e => { e.stopPropagation(); prev(); };
+  box.querySelector('.lb-next').onclick = e => { e.stopPropagation(); next(); };
+  box.querySelector('.lb-close').onclick = close;
+  box.onclick = e => { if (e.target === box) close(); };
+  // 键盘左右 + Esc
+  const onKey = e => {
+    if (!box.classList.contains('open')) { document.removeEventListener('keydown', onKey); return; }
+    if (e.key === 'ArrowLeft') prev();
+    else if (e.key === 'ArrowRight') next();
+    else if (e.key === 'Escape') close();
+  };
+  document.addEventListener('keydown', onKey);
+  // 触屏滑动
+  let sx = 0;
+  imgEl.ontouchstart = e => { sx = e.touches[0].clientX; };
+  imgEl.ontouchend = e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (dx > 40) prev(); else if (dx < -40) next();
+  };
+  show();
+  box.classList.add('open');
+  document.body.style.overflow = 'hidden';
 }
 
 /* ---------- Render: Quick Nav ---------- */

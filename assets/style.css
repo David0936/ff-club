@@ -1490,3 +1490,109 @@ section { padding: 120px 0; position: relative; z-index: 1; }
   .crest { width: 80px; height: 88px; }
   .crest--lg { width: 110px; height: 121px; }
 }
+
+/* ============== 外圈人脉 · 真实合影卡片 ============== */
+.connection-card.photo {
+  position: relative;
+  padding: 0;
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--ink-3);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.connection-card.photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease, filter .3s ease;
+  /* 隐私保护：默认轻微模糊 + 暗化，hover 时清晰 */
+  filter: brightness(0.82);
+}
+.connection-card.photo:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+}
+.connection-card.photo:hover img { transform: scale(1.06); filter: brightness(1); }
+.connection-card.photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(7,17,30,0.92) 100%);
+  pointer-events: none;
+}
+.conn-uploader {
+  position: absolute; left: 10px; bottom: 10px; z-index: 2;
+  font-family: var(--font-cn);
+  font-size: 13px; letter-spacing: 0.04em;
+  color: var(--gold-2);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.conn-caption {
+  position: absolute; left: 10px; right: 10px; bottom: 30px; z-index: 2;
+  font-family: var(--font-serif);
+  font-size: 12px; color: var(--bone-2);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+.conn-count {
+  position: absolute; top: 8px; right: 8px; z-index: 2;
+  background: rgba(7,17,30,0.7);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 2px 9px;
+  font-size: 11px; color: var(--bone);
+  letter-spacing: 0.05em;
+}
+
+/* ============== 合影灯箱 ============== */
+.conn-lightbox {
+  position: fixed; inset: 0; z-index: 1200;
+  background: rgba(3,8,15,0.95);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center; justify-content: center;
+}
+.conn-lightbox.open { display: flex; }
+.conn-lightbox .lb-img {
+  max-width: 88vw; max-height: 82vh;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  user-select: none;
+}
+.conn-lightbox .lb-close {
+  position: absolute; top: 22px; right: 28px;
+  background: none; border: none; color: var(--gold);
+  font-size: 38px; line-height: 1; cursor: pointer;
+}
+.conn-lightbox .lb-prev, .conn-lightbox .lb-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(201,163,91,0.08);
+  border: 1px solid var(--line);
+  color: var(--gold);
+  font-size: 40px; line-height: 1;
+  width: 56px; height: 56px; border-radius: 50%;
+  cursor: pointer; transition: all .25s ease;
+  display: flex; align-items: center; justify-content: center;
+}
+.conn-lightbox .lb-prev:hover, .conn-lightbox .lb-next:hover {
+  background: var(--gold); color: var(--ink);
+}
+.conn-lightbox .lb-prev { left: 4vw; }
+.conn-lightbox .lb-next { right: 4vw; }
+.conn-lightbox .lb-meta {
+  position: absolute; bottom: 26px; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-cn);
+  color: var(--bone-2); font-size: 14px; letter-spacing: 0.05em;
+}
+.conn-lightbox .lb-uploader { color: var(--gold-2); }
+.conn-lightbox .lb-idx { color: var(--bone-3); font-family: var(--font-sans); }
+@media (max-width: 768px) {
+  .conn-lightbox .lb-prev { left: 8px; width: 44px; height: 44px; font-size: 30px; }
+  .conn-lightbox .lb-next { right: 8px; width: 44px; height: 44px; font-size: 30px; }
+  .conn-lightbox .lb-close { top: 14px; right: 16px; }
+}

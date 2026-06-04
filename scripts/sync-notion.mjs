@@ -7,7 +7,9 @@
    运行：NOTION_TOKEN=xxx node scripts/sync-notion.mjs
    ============================================================ */
 
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, mkdirSync } from 'node:fs';
+
+const CONN_DIR = 'assets/connections';
 
 const TOKEN = process.env.NOTION_TOKEN;
 if (!TOKEN) { console.error('❌ 缺少 NOTION_TOKEN 环境变量'); process.exit(1); }
@@ -83,6 +85,22 @@ const getFileUrl = (page, name) => {
   if (!f) return '';
   return f.type === 'external' ? f.external.url : (f.file?.url || '');
 };
+const getAllFileUrls = (page, name) =>
+  (P(page, name)?.files || [])
+    .map(f => (f.type === 'external' ? f.external.url : (f.file?.url || '')))
+    .filter(Boolean);
+
+/* ---------- 下载图片到本地（Notion 文件 URL 会过期，须落盘） ---------- */
+function extFromUrl(url) {
+  const m = url.split('?')[0].match(/\.(jpe?g|png|webp|gif)$/i);
+  return m ? m[1].toLowerCase().replace('jpeg', 'jpg') : 'jpg';
+}
+async function downloadImage(url, destPath) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const buf = Buffer.from(await res.arrayBuffer());
+  writeFileSync(destPath, buf);
+}
 
 /* ---------- 富文本 → HTML（含粗体/斜体/链接/代码） ---------- */
 function richToHtml(rich) {
@@ -193,6 +211,33 @@ async function main() {
     .map(([word, n]) => ({ word, w: Math.max(2, Math.round((n / maxFreq) * 10)) }))
     .sort((a, b) => b.w - a.w);
 
+  /* === 1b. 外圈人脉合影（合影上墙=✓，下载图片落盘） === */
+  mkdirSync(CONN_DIR, { recursive: true });
+  const connections = [];
+  for (const p of memberPages) {
+    if (!getCheck(p, '合影上墙')) continue;
+    const level = getSelect(p, '等级');
+    if (level === '已离开' || level === '申请中') continue;
+    const urls = getAllFileUrls(p, '名人合影');
+    if (!urls.length) continue;
+    const name = getTitle(p, '姓名');
+    const id = p.id.replace(/-/g, '').slice(0, 8);
+    const photos = [];
+    for (let i = 0; i < urls.length; i++) {
+      const rel = `${CONN_DIR}/${id}-${i}.${extFromUrl(urls[i])}`;
+      try { await downloadImage(urls[i], rel); photos.push(rel); }
+      catch (e) { console.warn(`⚠️ ${name} 第${i + 1}张合影下载失败: ${e.message}`); }
+    }
+    if (photos.length) {
+      connections.push({
+        id, uploader: name,
+        caption: getText(p, '合影说明'),
+        featured: photos[0],
+        photos,
+      });
+    }
+  }
+
   /* === 2. 公开文章（上网站=✓，含全文） === */
   const articlePages = await queryAll(DB.articles, {
     property: '上网站', checkbox: { equals: true },
@@ -229,12 +274,12 @@ async function main() {
   /* === 写出 === */
   const payload = {
     syncedAt: new Date().toISOString().slice(0, 10),
-    founders, members: coreMembers, keywords, articles, reports,
+    founders, members: coreMembers, keywords, articles, reports, connections,
   };
   const js = `/* 自动生成 · 请勿手改 · 由 scripts/sync-notion.mjs 同步自 Notion */\nwindow.FFC_NOTION = ${JSON.stringify(payload, null, 2)};\n`;
   writeFileSync('assets/notion-data.js', js, 'utf8');
 
-  console.log(`✅ 同步完成：发起人 ${founders.length} · 核心 ${coreMembers.length} · 关键词 ${keywords.length} · 文章 ${articles.length} · 研报 ${reports.length}`);
+  console.log(`✅ 同步完成：发起人 ${founders.length} · 核心 ${coreMembers.length} · 关键词 ${keywords.length} · 文章 ${articles.length} · 研报 ${reports.length} · 合影 ${connections.length}`);
 }
 
 main().catch(e => { console.error('❌ 同步失败：', e.message); process.exit(1); });
