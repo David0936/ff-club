@@ -425,41 +425,34 @@
   <section class="sub-hero">
     <div class="container">
       <div class="crown-mini">CHAPTER · 02</div>
-      <h1>推特动态墙</h1>
-      <div class="en">TWITTER · SYNC</div>
-      <p>"墙外的声音，在墙内同步发声。"<br/>核心大佬的 X / Twitter 实时同步 — 国内成员无需翻墙，也能第一时间读到一线观点。</p>
+      <h1>推特投研看板</h1>
+      <div class="en">X · INTELLIGENCE</div>
+      <p>"AI 把博主推文，读成结构化投研。"<br/>追踪官方推荐 + 成员自定义博主，自动抽取标的、立场、置信度。</p>
       <a href="#home" class="back-link">← 返回首页</a>
     </div>
   </section>
   <section>
     <div class="container">
-      <div class="placeholder-block">
-        <div class="seal">SOON</div>
-        <h3>抓取管道搭建中</h3>
-        <p>无服务器阶段建议三种方案，确认后我直接接入：</p>
-        <ul class="checklist">
-          <li><strong>RSSHub</strong> 自部署节点 + 前端 fetch 渲染（最稳）</li>
-          <li><strong>Nitter</strong> 公共实例镜像（零成本，可能限速）</li>
-          <li><strong>定时脚本</strong> + GitHub Actions 抓取到 JSON（推荐，可缓存）</li>
-        </ul>
-        <p style="margin-top:24px;font-size:13px;color:var(--bone-3);">先告诉我哪几位核心大佬的 X 账号优先抓取，我配置好 feed 列表。</p>
+      <!-- VIP 门槛提示 -->
+      <div class="vip-gate" id="tweets-gate">
+        <span class="vip-badge">VIP 2 · 实时</span>
+        <p>推特投研为 <strong>VIP2 会员</strong>专享。下方为公开示例，完整看板与成员自定义订阅需入会解锁。</p>
+        <button class="btn-gold" data-apply style="margin-top:6px;">申请加入解锁</button>
       </div>
-      <div class="feed-grid">
-        <div class="feed-card">
-          <div class="author"><div class="avatar">DX</div><div><div class="name">王德尔 Dax</div><div class="handle">@dax · 占位</div></div></div>
-          <div class="content">这里将自动展示成员最新推文，含图片、引用、转发标记。</div>
-          <div class="meta">2026 · 5 · 24　·　12.3K 阅读</div>
-        </div>
-        <div class="feed-card">
-          <div class="author"><div class="avatar">FR</div><div><div class="name">Franco 哥哥</div><div class="handle">@franco · 占位</div></div></div>
-          <div class="content">支持中英双语 · 长推文截断 · 一键跳转原文。</div>
-          <div class="meta">2026 · 5 · 23　·　8.7K 阅读</div>
-        </div>
-        <div class="feed-card">
-          <div class="author"><div class="avatar">ES</div><div><div class="name">Eason</div><div class="handle">@eason · 占位</div></div></div>
-          <div class="content">支持按关键词、时间、作者筛选。投资 / AI / Web3 tag 自动分类。</div>
-          <div class="meta">2026 · 5 · 22　·　5.4K 阅读</div>
-        </div>
+
+      <!-- 顶部统计 -->
+      <div class="tw-stats" id="tweets-stats"></div>
+
+      <!-- 主体：左推文流 + 右公司速读 -->
+      <div class="tw-layout">
+        <div class="tw-feed" id="tweets-feed"></div>
+        <div class="tw-side" id="tweets-tickers"></div>
+      </div>
+
+      <div id="tweets-empty" class="placeholder-block" style="display:none;">
+        <div class="seal">SOON</div>
+        <h3>推特投研即将上线</h3>
+        <p>在 Notion「🐦 推特投研」里解析推文并勾「上网站」，第二天自动出现在这里。</p>
       </div>
     </div>
   </section>

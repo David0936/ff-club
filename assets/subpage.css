@@ -247,3 +247,61 @@
 .report-summary { font-family: var(--font-serif); font-size: 15px; color: var(--bone-2); line-height: 1.7; margin: 0 0 14px; }
 .report-tickers { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.1em; color: var(--gold-2); margin-bottom: 14px; }
 .report-cta { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.12em; color: var(--gold); padding-top: 14px; border-top: 1px solid var(--line-2); }
+
+/* ===== 推特投研看板（Serenity 风格） ===== */
+.vip-gate {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  background: linear-gradient(135deg, rgba(201,163,91,0.08), transparent);
+  border: 1px solid var(--gold-3);
+  padding: 20px 24px; margin-bottom: 28px;
+}
+.vip-badge {
+  font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.2em;
+  color: var(--ink); background: var(--gold); padding: 3px 12px; border-radius: 20px;
+}
+.vip-gate p { margin: 0; font-family: var(--font-serif); font-size: 15px; color: var(--bone-2); }
+.vip-gate strong { color: var(--gold-2); }
+
+.tw-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.tw-stat { border: 1px solid var(--line); background: var(--ink-2); padding: 16px 20px; }
+.tw-stat.green { border-color: rgba(60,160,90,0.3); }
+.tw-stat .k { font-size: 11px; letter-spacing: 0.2em; color: var(--bone-3); }
+.tw-stat .v { font-family: var(--font-cn); font-size: 38px; color: var(--bone); line-height: 1.1; margin: 6px 0; }
+.tw-stat .s { font-size: 12px; color: var(--gold-2); }
+
+.tw-layout { display: grid; grid-template-columns: 1.7fr 1fr; gap: 24px; align-items: start; }
+.tw-feed-head, .tw-side-head {
+  font-family: var(--font-cn); font-size: 14px; color: var(--bone-3);
+  letter-spacing: 0.1em; margin-bottom: 14px;
+}
+.tw-card { border: 1px solid var(--line); background: var(--ink-2); padding: 20px 22px; margin-bottom: 16px; transition: border-color .25s ease; }
+.tw-card:hover { border-color: var(--gold-3); }
+.tw-card-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.tw-author { font-family: var(--font-sans); font-size: 14px; color: var(--gold-2); }
+.tw-date { font-size: 12px; color: var(--bone-3); }
+.tw-x { margin-left: auto; font-size: 12px; color: var(--gold); border: 1px solid var(--line); padding: 2px 10px; border-radius: 4px; }
+.tw-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.tw-badge { font-size: 11px; letter-spacing: 0.05em; padding: 3px 10px; border-radius: 4px; border: 1px solid var(--line); color: var(--bone-2); }
+.tw-badge.long { color: #6fcf97; border-color: rgba(111,207,151,0.4); background: rgba(111,207,151,0.08); }
+.tw-badge.short { color: #eb6f6f; border-color: rgba(235,111,111,0.4); background: rgba(235,111,111,0.08); }
+.tw-badge.neutral { color: var(--bone-3); }
+.tw-badge.conf { color: var(--gold-2); }
+.tw-badge.sector { color: var(--bone-2); }
+.tw-tickers { font-family: var(--font-sans); font-size: 13px; letter-spacing: 0.05em; color: var(--gold); margin-bottom: 10px; }
+.tw-insight { font-family: var(--font-serif); font-size: 15px; color: var(--bone); background: var(--ink-3); border-left: 2px solid var(--gold); padding: 10px 14px; margin-bottom: 12px; }
+.tw-raw { font-family: var(--font-serif); font-size: 14px; line-height: 1.7; color: var(--bone-2); }
+
+.tw-side { position: sticky; top: 90px; }
+.tw-ticker { border: 1px solid var(--line); background: var(--ink-2); padding: 14px 16px; margin-bottom: 12px; }
+.tw-ticker-top { display: flex; align-items: center; justify-content: space-between; }
+.tw-ticker .sym { font-family: var(--font-sans); font-size: 15px; color: var(--bone); font-weight: 600; }
+.tw-mini { font-size: 11px; padding: 2px 8px; border-radius: 4px; }
+.tw-mini.long { color: #6fcf97; background: rgba(111,207,151,0.1); }
+.tw-mini.short { color: #eb6f6f; background: rgba(235,111,111,0.1); }
+.tw-ticker-sub { font-size: 12px; color: var(--bone-3); margin-top: 6px; }
+
+@media (max-width: 900px) {
+  .tw-layout { grid-template-columns: 1fr; }
+  .tw-side { position: static; }
+  .tw-stats { grid-template-columns: 1fr; }
+}

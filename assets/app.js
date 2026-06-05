@@ -704,6 +704,76 @@ function initRouter() {
   handleRoute();
 }
 
+/* ---------- Render: 推特投研看板（Serenity 风格） ---------- */
+function renderTweets() {
+  const feed = $('#tweets-feed');
+  const side = $('#tweets-tickers');
+  const stats = $('#tweets-stats');
+  const empty = $('#tweets-empty');
+  if (!feed) return;
+  const tweets = (window.FFC_NOTION?.tweets) || [];
+  if (!tweets.length) {
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+
+  const stanceClass = s => s === '看多' ? 'long' : s === '看空' ? 'short' : 'neutral';
+
+  // 统计：推文数 + 涉及标的
+  const allTickers = new Set();
+  tweets.forEach(t => (t.tickers || '').split(/[\s,，·]+/).forEach(x => {
+    const m = x.match(/\$?[A-Z]{1,6}(\.[A-Z]{2})?|\d{6}(\.[A-Z]{2})?/);
+    if (m && x.length > 1) allTickers.add(x.replace(/[（）()]/g, ''));
+  }));
+  if (stats) {
+    stats.innerHTML = `
+      <div class="tw-stat"><div class="k">推文</div><div class="v">${tweets.length}</div><div class="s">最新解析</div></div>
+      <div class="tw-stat green"><div class="k">涉及标的</div><div class="v">${allTickers.size}</div><div class="s">${[...allTickers].slice(0,6).join(' · ') || '—'}</div></div>`;
+  }
+
+  // 左：推文流
+  feed.innerHTML = `<div class="tw-feed-head">最新 ${tweets.length} 条 · 时间线</div>` +
+    tweets.map(t => `
+      <div class="tw-card">
+        <div class="tw-card-top">
+          <span class="tw-author">${t.author || '@unknown'}</span>
+          <span class="tw-date">${t.date || ''}</span>
+          ${t.link ? `<a class="tw-x" href="${t.link}" target="_blank" rel="noopener">↗ X</a>` : ''}
+        </div>
+        <div class="tw-badges">
+          ${t.stance ? `<span class="tw-badge ${stanceClass(t.stance)}">${t.stance}</span>` : ''}
+          ${t.confidence ? `<span class="tw-badge conf">置信 ${t.confidence}</span>` : ''}
+          ${t.sector ? `<span class="tw-badge sector">${t.sector}</span>` : ''}
+        </div>
+        ${t.tickers ? `<div class="tw-tickers">${t.tickers}</div>` : ''}
+        ${t.insight ? `<div class="tw-insight">🤖 ${t.insight}</div>` : ''}
+        <div class="tw-raw">${(t.raw || '').slice(0, 260)}${(t.raw || '').length > 260 ? '…' : ''}</div>
+      </div>`).join('');
+
+  // 右：公司速读（按标的聚合立场）
+  if (side) {
+    const byTicker = {};
+    tweets.forEach(t => {
+      (t.tickers || '').split(/[\s,，·]+/).forEach(x => {
+        const tk = x.replace(/[（）()]/g, '');
+        if (tk.length < 2) return;
+        if (!byTicker[tk]) byTicker[tk] = { long: 0, short: 0, sector: t.sector, last: t.date };
+        if (t.stance === '看多') byTicker[tk].long++;
+        else if (t.stance === '看空') byTicker[tk].short++;
+      });
+    });
+    const items = Object.entries(byTicker).slice(0, 10);
+    side.innerHTML = `<div class="tw-side-head">🏷 公司速读</div>` +
+      (items.length ? items.map(([tk, d]) => `
+        <div class="tw-ticker">
+          <div class="tw-ticker-top"><span class="sym">${tk}</span>
+            <span class="tw-mini ${d.long >= d.short ? 'long' : 'short'}">${d.long >= d.short ? '偏多' : '偏空'}</span></div>
+          <div class="tw-ticker-sub">${d.sector || ''}　·　多 ${d.long} / 空 ${d.short}</div>
+        </div>`).join('') : '<div class="tw-ticker-sub" style="padding:12px;">暂无</div>');
+  }
+}
+
 /* ---------- Builder（David 小鱼）联系方式弹窗 ---------- */
 function initBuilderModal() {
   const backdrop = $('#builder-modal');
@@ -756,6 +826,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPricing();
   renderArticles();
   renderReports();
+  renderTweets();
   initAdmin();
   initApplyModal();
   initArticleModal();

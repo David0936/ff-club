@@ -21,6 +21,7 @@ const DB = {
   members:  '534eb8a6-59d3-4954-8292-34b89553585e', // 👥 学员集合
   articles: 'd7508972-c532-4457-b844-aed8964ac95e', // 📰 公开科普文章
   reports:  'f0b0cdda-abd2-44c5-b812-6ecfa4f41ca6', // 🔒 会员研报
+  tweets:   'ba405e1f-f3de-4f96-9511-5363cb37373e', // 🐦 推特投研
 };
 const INVITE_PAGE = '37635de2-3c6e-8107-9b5f-cac57788bfc3'; // 📧 待邀请邮箱清单
 
@@ -309,15 +310,34 @@ async function main() {
     communityUrl: getUrl(p, '社区全文链接') || 'https://ff-club-2026.netlify.app',
   })).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
+  /* === 4. 推特投研（上网站=✓，VIP 看板） === */
+  const tweetPages = await queryAll(DB.tweets, {
+    property: '上网站', checkbox: { equals: true },
+  });
+  const tweets = tweetPages.map(p => ({
+    id: p.id.replace(/-/g, '').slice(0, 12),
+    summary: getTitle(p, '推文摘要'),
+    author: getText(p, '博主'),
+    date: getDate(p, '日期'),
+    tickers: getText(p, '标的'),
+    stance: getSelect(p, '作者立场'),
+    confidence: getSelect(p, '置信度'),
+    sector: getText(p, '行业'),
+    insight: getText(p, 'AI解读'),
+    raw: getText(p, '推文原文'),
+    link: getUrl(p, '推文链接'),
+    source: getSelect(p, '来源'),
+  })).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
   /* === 写出 === */
   const payload = {
     syncedAt: new Date().toISOString().slice(0, 10),
-    founders, members: coreMembers, keywords, articles, reports, connections,
+    founders, members: coreMembers, keywords, articles, reports, connections, tweets,
   };
   const js = `/* 自动生成 · 请勿手改 · 由 scripts/sync-notion.mjs 同步自 Notion */\nwindow.FFC_NOTION = ${JSON.stringify(payload, null, 2)};\n`;
   writeFileSync('assets/notion-data.js', js, 'utf8');
 
-  console.log(`✅ 同步完成：发起人 ${founders.length} · 核心 ${coreMembers.length} · 关键词 ${keywords.length} · 文章 ${articles.length} · 研报 ${reports.length} · 合影 ${connections.length} · 待邀请邮箱 ${pendingEmails.length}`);
+  console.log(`✅ 同步完成：发起人 ${founders.length} · 核心 ${coreMembers.length} · 关键词 ${keywords.length} · 文章 ${articles.length} · 研报 ${reports.length} · 合影 ${connections.length} · 推特 ${tweets.length} · 待邀请邮箱 ${pendingEmails.length}`);
 }
 
 main().catch(e => { console.error('❌ 同步失败：', e.message); process.exit(1); });
