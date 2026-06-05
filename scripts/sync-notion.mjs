@@ -22,6 +22,7 @@ const DB = {
   articles: 'd7508972-c532-4457-b844-aed8964ac95e', // 📰 公开科普文章
   reports:  'f0b0cdda-abd2-44c5-b812-6ecfa4f41ca6', // 🔒 会员研报
 };
+const INVITE_PAGE = '37635de2-3c6e-8107-9b5f-cac57788bfc3'; // 📧 待邀请邮箱清单
 
 /* ---------- 仅输出的安全社交字段 ---------- */
 const SOCIAL_FIELDS = {
@@ -80,6 +81,8 @@ const getMulti  = (page, name) => (P(page, name)?.multi_select || []).map(o => o
 const getUrl    = (page, name) => P(page, name)?.url || '';
 const getCheck  = (page, name) => !!P(page, name)?.checkbox;
 const getDate   = (page, name) => P(page, name)?.date?.start || '';
+const getEmail  = (page, name) => P(page, name)?.email || '';
+const getStatus = (page, name) => P(page, name)?.status?.name || '';
 const getFileUrl = (page, name) => {
   const f = (P(page, name)?.files || [])[0];
   if (!f) return '';
@@ -176,6 +179,26 @@ async function tableToHtml(tableId) {
   return `<table class="art-table">${rows}</table>`;
 }
 
+/* ---------- 更新「待邀请邮箱清单」页面里的代码框 ---------- */
+async function updateInviteEmails(emailStr) {
+  // 找到页面里的第一个 code 块
+  const data = await notion(`blocks/${INVITE_PAGE}/children?page_size=100`);
+  const codeBlock = data.results.find(b => b.type === 'code');
+  const content = emailStr || '（暂无待邀请成员 · 都邀请完啦）';
+  if (!codeBlock) { console.warn('⚠️ 邀请页未找到 code 块，跳过'); return; }
+  await fetch(`https://api.notion.com/v1/blocks/${codeBlock.id}`, {
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Notion-Version': NOTION_VERSION,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      code: { language: 'plain text', rich_text: [{ type: 'text', text: { content } }] },
+    }),
+  });
+}
+
 /* ---------- 主流程 ---------- */
 async function main() {
   console.log('🔄 拉取 Notion 数据…');
@@ -243,6 +266,16 @@ async function main() {
     }
   }
 
+  /* === 1c. 待邀请邮箱清单（审核完成 + 未邀请 → 逗号串） === */
+  const pendingEmails = memberPages
+    .filter(p => getStatus(p, '申请状态') === '完成'
+              && !getCheck(p, '已邀请入空间')
+              && getEmail(p, 'Notion 邮箱'))
+    .map(p => getEmail(p, 'Notion 邮箱'));
+  const emailStr = [...new Set(pendingEmails)].join(', ');
+  try { await updateInviteEmails(emailStr); }
+  catch (e) { console.warn('⚠️ 更新待邀请邮箱失败：', e.message); }
+
   /* === 2. 公开文章（上网站=✓，含全文） === */
   const articlePages = await queryAll(DB.articles, {
     property: '上网站', checkbox: { equals: true },
@@ -284,7 +317,7 @@ async function main() {
   const js = `/* 自动生成 · 请勿手改 · 由 scripts/sync-notion.mjs 同步自 Notion */\nwindow.FFC_NOTION = ${JSON.stringify(payload, null, 2)};\n`;
   writeFileSync('assets/notion-data.js', js, 'utf8');
 
-  console.log(`✅ 同步完成：发起人 ${founders.length} · 核心 ${coreMembers.length} · 关键词 ${keywords.length} · 文章 ${articles.length} · 研报 ${reports.length} · 合影 ${connections.length}`);
+  console.log(`✅ 同步完成：发起人 ${founders.length} · 核心 ${coreMembers.length} · 关键词 ${keywords.length} · 文章 ${articles.length} · 研报 ${reports.length} · 合影 ${connections.length} · 待邀请邮箱 ${pendingEmails.length}`);
 }
 
 main().catch(e => { console.error('❌ 同步失败：', e.message); process.exit(1); });
