@@ -1,6 +1,6 @@
 /* 自动生成 · 请勿手改 · 由 scripts/sync-notion.mjs 同步自 Notion */
 window.FFC_NOTION = {
-  "syncedAt": "2026-06-04",
+  "syncedAt": "2026-06-05",
   "founders": [
     {
       "id": "37435de2",
