@@ -332,14 +332,10 @@ window.FFC_NOTION = {
     },
     {
       "word": "内容创作",
-      "w": 6
+      "w": 7
     },
     {
       "word": "AI",
-      "w": 4
-    },
-    {
-      "word": "一级市场",
       "w": 4
     },
     {
@@ -355,15 +351,23 @@ window.FFC_NOTION = {
       "w": 3
     },
     {
+      "word": "一级市场",
+      "w": 3
+    },
+    {
+      "word": "港股",
+      "w": 2
+    },
+    {
       "word": "A股",
       "w": 2
     },
     {
-      "word": "出海",
+      "word": "财税 / 身份规划",
       "w": 2
     },
     {
-      "word": "财税 / 身份规划",
+      "word": "出海",
       "w": 2
     }
   ],
@@ -492,5 +496,21 @@ window.FFC_NOTION = {
       "communityUrl": "https://ff-club-2026.netlify.app"
     }
   ],
-  "connections": []
+  "connections": [],
+  "tweets": [
+    {
+      "id": "37635de23c6e",
+      "summary": "看多人形机器人核心零部件：绿的谐波（688017）",
+      "author": "@aleabitoreddit",
+      "date": "2026-06-05",
+      "tickers": "688017.SH（绿的谐波）· 关联 $NVDA $TSLA",
+      "stance": "看多",
+      "confidence": "中",
+      "sector": "机器人 / 人形机器人零部件",
+      "insight": "对人形机器人产业链的方向性做多：绿的谐波在谐波减速器占国内 60%+ 份额、1800+ 全球客户，受益于人形机器人量产，BOM 占比 4-15%。",
+      "raw": "绿的谐波（LeaderDrive，688017）是我布局人形机器人赛道时最青睐的中国上市标的。业务涵盖谐波减速器（国内 60%+ 份额、1800+ 全球客户）、人形机器人旋转关节减速器、直线执行器、电机/关节等核心零部件，并进军行星滚柱丝杠。主要客户含优傲、优必选、智元，特斯拉/Figure 等都可能是潜在客户。BOM 估计占每台 4-15%。这是对人形机器人量产的方向性做多。",
+      "link": "https://x.com/aleabitoreddit",
+      "source": "官方推荐"
+    }
+  ]
 };
