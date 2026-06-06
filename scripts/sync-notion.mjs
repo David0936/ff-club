@@ -213,7 +213,7 @@ async function main() {
       if (url) socials[key] = url;
     }
     return {
-      id: p.id.replace(/-/g, '').slice(0, 12),
+      id: p.id.replace(/-/g, ''),
       name: getTitle(p, '姓名'),
       en: getText(p, '英文名'),
       title: getText(p, '一句话介绍'),
@@ -250,7 +250,7 @@ async function main() {
     ];
     if (!urls.length) continue;
     const name = getTitle(p, '姓名');
-    const id = p.id.replace(/-/g, '').slice(0, 12);
+    const id = p.id.replace(/-/g, '');
     const photos = [];
     for (let i = 0; i < urls.length; i++) {
       const rel = `${CONN_DIR}/${id}-${i}.${extFromUrl(urls[i])}`;
@@ -284,7 +284,7 @@ async function main() {
   const articles = [];
   for (const p of articlePages) {
     articles.push({
-      id: p.id.replace(/-/g, '').slice(0, 12),
+      id: p.id.replace(/-/g, ''),
       title: getTitle(p, '标题'),
       summary: getText(p, '摘要'),
       category: getMulti(p, '分类'),
@@ -301,7 +301,7 @@ async function main() {
     property: '上网站', checkbox: { equals: true },
   });
   const reports = reportPages.map(p => ({
-    id: p.id.replace(/-/g, '').slice(0, 12),
+    id: p.id.replace(/-/g, ''),
     title: getTitle(p, '标题'),
     summary: getText(p, '钩子摘要'),
     category: getMulti(p, '分类'),
@@ -315,7 +315,7 @@ async function main() {
     property: '上网站', checkbox: { equals: true },
   });
   const tweets = tweetPages.map(p => ({
-    id: p.id.replace(/-/g, '').slice(0, 12),
+    id: p.id.replace(/-/g, ''),
     summary: getTitle(p, '推文摘要'),
     author: getText(p, '博主'),
     date: getDate(p, '日期'),
