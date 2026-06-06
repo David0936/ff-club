@@ -395,7 +395,7 @@ window.FFC_NOTION = {
       "author": "FFC 编辑部",
       "date": "2026-06-03",
       "cover": "",
-      "html": "<blockquote>本文为免费科普，不构成投资建议。开户请以各券商官方最新要求为准。</blockquote><h3>为什么要开美股账户</h3><p>直接持有 NVDA、MSFT 这类美股核心资产，需要一个能交易美股的券商账户。国内用户常见三个选择：</p><h3>三家主流券商对比</h3><table class=\"art-table\"><tr><th>券商</th><th>特点</th><th>适合</th></tr><tr><td><strong>忌龚 moomoo</strong></td><td>界面友好、数据全</td><td>新手首选</td></tr><tr><td><strong>盈动老虎</strong></td><td>生态成熟、港美通吃</td><td>进阶</td></tr><tr><td><strong>盈资 Webull</strong></td><td>纯美股、期权强</td><td>期权/进阶</td></tr></table><h3>开户四步</h3><ol><li>准备身份证 + 地址证明</li><li>下载 App 填资料，通常 1-2 天审核</li><li>出入金（电汇 / 第三方渠道）</li><li>入金后即可下单</li></ol><h3>报税提醒</h3><p>美股资本利得、股息的税务处理因人而异，跨境报税详见社区「财税规划」专题。</p><hr/><blockquote>🔒 更深入的<strong>账户架构、跨境资金、身份规划</strong>内容，仅对会员开放，<a href=\"https://ff-club-2026.netlify.app/\" target=\"_blank\" rel=\"noopener\">申请加入财富自由 Club</a>。</blockquote>"
+      "html": "<blockquote>本文为免费科普，不构成投资建议。开户请以各券商官方最新要求为准。</blockquote><h3>为什么要开美股账户</h3><p>直接持有 NVDA、MSFT 这类美股核心资产，需要一个能交易美股的券商账户。国内用户常见三个选择：</p><h3>三家主流券商对比</h3><table class=\"art-table\"><tr><th>券商</th><th>特点</th><th>适合</th></tr><tr><td><strong>忌龚 moomoo</strong></td><td>界面友好、数据全</td><td>新手首选</td></tr><tr><td><strong>盈动老虎</strong></td><td>生态成熟、港美通吃</td><td>进阶</td></tr><tr><td><strong>盈资 Webull</strong></td><td>纯美股、期权强</td><td>期权/进阶</td></tr></table><h3>开户四步</h3><ol><li>准备身份证 + 地址证明</li><li>下载 App 填资料，通常 1-2 天审核</li><li>出入金（电汇 / 第三方渠道）</li><li>入金后即可下单</li></ol><h3>报税提醒</h3><p>美股资本利得、股息的税务处理因人而异，跨境报税详见社区「财税规划」专题。</p><hr/><blockquote>🔒 更深入的<strong>账户架构、跨境资金、身份规划</strong>内容，仅对会员开放，<a href=\"https://ff-club.vercel.app/\" target=\"_blank\" rel=\"noopener\">申请加入财富自由 Club</a>。</blockquote>"
     }
   ],
   "reports": [
@@ -409,7 +409,7 @@ window.FFC_NOTION = {
       ],
       "tickers": "NVDA·MU·AVGO·MRVL·VRT·CEG·OKLO",
       "date": "2026-06-03",
-      "communityUrl": "https://ff-club-2026.netlify.app"
+      "communityUrl": "https://ff-club.vercel.app"
     },
     {
       "id": "37435de23c6e",
@@ -421,7 +421,7 @@ window.FFC_NOTION = {
       ],
       "tickers": "0700.HK",
       "date": "2026-06-03",
-      "communityUrl": "https://ff-club-2026.netlify.app"
+      "communityUrl": "https://ff-club.vercel.app"
     },
     {
       "id": "37435de23c6e",
@@ -433,7 +433,7 @@ window.FFC_NOTION = {
       ],
       "tickers": "NVDA · AVGO · VRT",
       "date": "2026-06-03",
-      "communityUrl": "https://ff-club-2026.netlify.app"
+      "communityUrl": "https://ff-club.vercel.app"
     },
     {
       "id": "37535de23c6e",
@@ -445,7 +445,7 @@ window.FFC_NOTION = {
       ],
       "tickers": "MRVL",
       "date": "2026-06-02",
-      "communityUrl": "https://ff-club-2026.netlify.app"
+      "communityUrl": "https://ff-club.vercel.app"
     },
     {
       "id": "37535de23c6e",
@@ -457,7 +457,7 @@ window.FFC_NOTION = {
       ],
       "tickers": "MRVL",
       "date": "2026-05-21",
-      "communityUrl": "https://ff-club-2026.netlify.app"
+      "communityUrl": "https://ff-club.vercel.app"
     },
     {
       "id": "37535de23c6e",
@@ -469,7 +469,7 @@ window.FFC_NOTION = {
       ],
       "tickers": "CBRS",
       "date": "2026-05-14",
-      "communityUrl": "https://ff-club-2026.netlify.app"
+      "communityUrl": "https://ff-club.vercel.app"
     },
     {
       "id": "37535de23c6e",
@@ -481,7 +481,7 @@ window.FFC_NOTION = {
       ],
       "tickers": "MU · 三星 · SK海力士",
       "date": "2026-05-09",
-      "communityUrl": "https://ff-club-2026.netlify.app"
+      "communityUrl": "https://ff-club.vercel.app"
     },
     {
       "id": "37535de23c6e",
@@ -493,7 +493,7 @@ window.FFC_NOTION = {
       ],
       "tickers": "MU · SNDK · AMD",
       "date": "2025-10-22",
-      "communityUrl": "https://ff-club-2026.netlify.app"
+      "communityUrl": "https://ff-club.vercel.app"
     }
   ],
   "connections": [],

@@ -307,7 +307,7 @@ async function main() {
     category: getMulti(p, '分类'),
     tickers: getText(p, '标的'),
     date: getDate(p, '发布日期'),
-    communityUrl: getUrl(p, '社区全文链接') || 'https://ff-club-2026.netlify.app',
+    communityUrl: getUrl(p, '社区全文链接') || 'https://ff-club.vercel.app',
   })).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
   /* === 4. 推特投研（上网站=✓，VIP 看板） === */
