@@ -17,6 +17,15 @@ window.FFC_PRICING = {
 /* ---------- 申请问卷链接（Notion 发布表单） ---------- */
 window.FFC_FORM_URL = 'https://rocky-knife-e8a.notion.site/6d9d162db1104b4f8c82da8564535ad0';
 
+/* ---------- 外部链接接口 ----------
+   serenity 完整推特投研看板（独立站）部署后，把地址填到 tweetsBoard 即可，
+   主站「推特投研看板」页的「进入完整看板」按钮会自动激活并跳转。
+   留空时按钮显示「即将上线」灰态，不影响其它功能。
+   例：'https://david0936.github.io/claworld-Financial-Newa/' 或 Netlify 地址 */
+window.FFC_LINKS = {
+  tweetsBoard: '',   // ← 部署 serenity 后填这里
+};
+
 /* ---------- 联合发起人 ---------- */
 window.FFC_FOUNDERS = [
   {
@@ -139,7 +148,7 @@ window.FFC_CONNECTIONS = [
   { tier:'capital',    label:'区块链项目方',    hint:'待发布', img:'' }
 ];
 
-/* ---------- 5 个子页面入口（单文件 hash 路由）---------- */
+/* ---------- 子页面入口（单文件 hash 路由）---------- */
 window.FFC_QUICKNAV = [
   {
     num: '01',

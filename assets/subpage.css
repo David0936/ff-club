@@ -305,3 +305,17 @@
   .tw-side { position: static; }
   .tw-stats { grid-template-columns: 1fr; }
 }
+
+/* ===== 移动端加固（只作用窄屏，桌面/平板观感不变） ===== */
+@media (max-width: 768px) {
+  /* 子页 hero 顶部 180px 留白在手机上太空，收紧 */
+  .sub-hero { padding: 120px 0 56px; }
+  .sub-hero p { font-size: 15px; padding: 0 18px; }
+  .placeholder-block { margin: 48px auto; padding: 40px 22px; }
+  /* 文章里的宽表格在手机上改横向滑动，避免被裁切看不全 */
+  .art-doc-content .art-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+@media (max-width: 480px) {
+  /* 推文/文章/研报网格用了 minmax(320px,…)，超窄屏会溢出被裁 → 单列 */
+  .feed-grid, .reports-grid { grid-template-columns: 1fr; }
+}

@@ -19,3 +19,10 @@ e4ee7e2bc9e1c73e7980852328a76927.jpg
 # 研报 PDF（保留本地/Notion，不进公开网站仓库）
 研报pdf/
 *.pdf
+
+# serenity 推特看板是独立仓库(claworld-Financial-Newa)，被复制进来的副本不进静态主站仓库
+财经新闻追踪/
+
+# 本地部署/配置清单（私人参考，不进公开仓库）
+部署清单.md
+Notion填写清单.md

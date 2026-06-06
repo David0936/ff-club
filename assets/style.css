@@ -39,6 +39,9 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;  /* 防 iOS 横屏自动放大字号 */
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;  /* 去掉手机点击灰块闪烁 */
 }
 
 img { max-width: 100%; display: block; }

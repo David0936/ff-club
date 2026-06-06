@@ -774,6 +774,27 @@ function renderTweets() {
   }
 }
 
+/* ---------- 完整投研看板入口（serenity 独立站，地址在 data.js 的 FFC_LINKS.tweetsBoard） ---------- */
+function initTweetsBoardLink() {
+  const url = (window.FFC_LINKS && window.FFC_LINKS.tweetsBoard || '').trim();
+  $$('[data-fullboard]').forEach(btn => {
+    if (url) {
+      btn.disabled = false;
+      btn.style.opacity = '';
+      btn.style.cursor = '';
+      btn.title = url;
+      btn.addEventListener('click', () => window.open(url, '_blank', 'noopener'));
+    } else {
+      // 还没部署：灰态占位，不可点
+      btn.textContent = '完整看板 · 即将上线';
+      btn.disabled = true;
+      btn.style.opacity = '0.5';
+      btn.style.cursor = 'not-allowed';
+      btn.title = '部署 serenity 后，在 assets/data.js 填 FFC_LINKS.tweetsBoard 即可激活';
+    }
+  });
+}
+
 /* ---------- Builder（David 小鱼）联系方式弹窗 ---------- */
 function initBuilderModal() {
   const backdrop = $('#builder-modal');
@@ -827,6 +848,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderArticles();
   renderReports();
   renderTweets();
+  initTweetsBoardLink();
   initAdmin();
   initApplyModal();
   initArticleModal();

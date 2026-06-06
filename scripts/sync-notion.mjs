@@ -213,7 +213,7 @@ async function main() {
       if (url) socials[key] = url;
     }
     return {
-      id: p.id.replace(/-/g, '').slice(0, 8),
+      id: p.id.replace(/-/g, '').slice(0, 12),
       name: getTitle(p, '姓名'),
       en: getText(p, '英文名'),
       title: getText(p, '一句话介绍'),
@@ -250,7 +250,7 @@ async function main() {
     ];
     if (!urls.length) continue;
     const name = getTitle(p, '姓名');
-    const id = p.id.replace(/-/g, '').slice(0, 8);
+    const id = p.id.replace(/-/g, '').slice(0, 12);
     const photos = [];
     for (let i = 0; i < urls.length; i++) {
       const rel = `${CONN_DIR}/${id}-${i}.${extFromUrl(urls[i])}`;

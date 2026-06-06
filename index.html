@@ -440,6 +440,12 @@
         <button class="btn-gold" data-apply style="margin-top:6px;">申请加入解锁</button>
       </div>
 
+      <!-- 完整看板入口（serenity 独立站 · 部署后在 assets/data.js 填 FFC_LINKS.tweetsBoard 自动激活） -->
+      <div class="tw-fullboard-bar" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:center;text-align:center;margin:0 0 22px;">
+        <button class="btn-gold" id="tweets-fullboard-btn" data-fullboard style="margin:0;">进入完整投研看板 ↗</button>
+        <span class="tw-fullboard-note" style="font-family:var(--font-serif);font-style:italic;color:var(--bone-3);font-size:13px;">博主池 · 股票池 · 战绩 · 供应链 · 多源信号 — 完整工具站</span>
+      </div>
+
       <!-- 顶部统计 -->
       <div class="tw-stats" id="tweets-stats"></div>
 
@@ -507,6 +513,7 @@
     </div>
   </section>
 </div><!-- /VIEW: ARTICLES -->
+
 
 <!-- ARTICLE READER MODAL -->
 <div class="modal-backdrop" id="article-modal">
