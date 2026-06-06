@@ -1,9 +1,9 @@
 /* 自动生成 · 请勿手改 · 由 scripts/sync-notion.mjs 同步自 Notion */
 window.FFC_NOTION = {
-  "syncedAt": "2026-06-05",
+  "syncedAt": "2026-06-06",
   "founders": [
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "王宇 William",
       "en": "William",
       "title": "宇海科技创始人 · Crypto Trader",
@@ -16,7 +16,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "Eason",
       "en": "Eason",
       "title": "美股私募基本面分析师 · 管理九位数资产",
@@ -29,7 +29,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "Franco 哥哥",
       "en": "Franco",
       "title": "美国 CPA 财税事务所创始人 · 20W 粉商业博主",
@@ -44,7 +44,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "王德尔 Dax",
       "en": "Dax",
       "title": "全网 50 万粉丝 · 自由投资人",
@@ -60,7 +60,7 @@ window.FFC_NOTION = {
   ],
   "members": [
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "张德楷",
       "en": "Dekai",
       "title": "猎人量化创始人 · 量化交易研究者",
@@ -73,7 +73,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "韩沛好",
       "en": "Han Peihao",
       "title": "东非女企业家 · 多家品牌创始人",
@@ -86,7 +86,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "狗哥",
       "en": "Gouge",
       "title": "海金之路创始人 · 商业 IP 操盘手",
@@ -99,7 +99,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "伟哥",
       "en": "Wei",
       "title": "头部医美 MCN 创始人 · 连续创业者",
@@ -113,7 +113,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "David",
       "en": "David",
       "title": "小鱼 AI Agent 创业者 · AI 应用探索者",
@@ -126,7 +126,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "Sky G.cph",
       "en": "Sky",
       "title": "区块链 AI 创业者 · Cypherium 项目创始人",
@@ -140,7 +140,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "冯晨",
       "en": "Fengchen",
       "title": "河南工美集团联合创始人 · 产业投资人",
@@ -153,7 +153,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "李少侠",
       "en": "Li Shaoxia",
       "title": "御众集团创始人 · 投资人",
@@ -166,7 +166,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "Jason You",
       "en": "Jason You",
       "title": "00 后硅谷 AI 创业者 · Skylow Co-founder",
@@ -179,7 +179,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "奶奶小小",
       "en": "Naixx",
       "title": "硅谷 AI 创业者 · VC / AI Agent Explorer",
@@ -193,7 +193,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "三亿",
       "en": "Sanyi",
       "title": "Capital 前华语负责人 · Canton 中文区核心建设者",
@@ -205,7 +205,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "LeonG",
       "en": "LeonG",
       "title": "男性成长赛道头部 · 自由投资人",
@@ -218,7 +218,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "尤可欣 Isadora",
       "en": "Isadora",
       "title": "平台 9W 粉丝 Web3 KOL · BNB / OKE 合作伙伴 · Web3 投资人",
@@ -231,7 +231,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "鲍总",
       "en": "Bao",
       "title": "万宠联盟创始人 · 宠物产业创业者",
@@ -244,7 +244,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "赵撑伞",
       "en": "Zhao",
       "title": "100W 粉丝商业博主 · 创业内容创作者",
@@ -258,7 +258,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "Isaac Zhang",
       "en": "Isaac",
       "title": "Founder of Stealth AI-Web3 Startup · AI & Web3 Builder",
@@ -272,7 +272,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "Rain.Rain.Yang",
       "en": "Rain Yang",
       "title": "全网 50W 粉 · AI 产品经理 · 高奢女装品牌创始人",
@@ -286,7 +286,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "貂蝉不馋",
       "en": "Diaochan",
       "title": "全网 200W 粉内容博主 · 新媒体 IP 创作者",
@@ -299,7 +299,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "润总",
       "en": "Run",
       "title": "00 后创业者 · 财富自由实践者",
@@ -312,7 +312,7 @@ window.FFC_NOTION = {
       "socials": {}
     },
     {
-      "id": "37435de2",
+      "id": "37435de23c6e",
       "name": "嗯哼",
       "en": "EnHeng",
       "title": "05 后最年轻 A9 · 币圈 KOL",
@@ -395,7 +395,7 @@ window.FFC_NOTION = {
       "author": "FFC 编辑部",
       "date": "2026-06-03",
       "cover": "",
-      "html": "<blockquote>本文为免费科普，不构成投资建议。开户请以各券商官方最新要求为准。</blockquote><h3>为什么要开美股账户</h3><p>直接持有 NVDA、MSFT 这类美股核心资产，需要一个能交易美股的券商账户。国内用户常见三个选择：</p><h3>三家主流券商对比</h3><table class=\"art-table\"><tr><th>券商</th><th>特点</th><th>适合</th></tr><tr><td><strong>忌龚 moomoo</strong></td><td>界面友好、数据全</td><td>新手首选</td></tr><tr><td><strong>盈动老虎</strong></td><td>生态成熟、港美通吃</td><td>进阶</td></tr><tr><td><strong>盈资 Webull</strong></td><td>纯美股、期权强</td><td>期权/进阶</td></tr></table><h3>开户四步</h3><ol><li>准备身份证 + 地址证明</li><li>下载 App 填资料，通常 1-2 天审核</li><li>出入金（电汇 / 第三方渠道）</li><li>入金后即可下单</li></ol><h3>报税提醒</h3><p>美股资本利得、股息的税务处理因人而异，跨境报税详见社区「财税规划」专题。</p><hr/><blockquote>🔒 更深入的<strong>账户架构、跨境资金、身份规划</strong>内容，仅对会员开放，<a href=\"https://ff-club.vercel.app/\" target=\"_blank\" rel=\"noopener\">申请加入财富自由 Club</a>。</blockquote>"
+      "html": "<blockquote>本文为免费科普，不构成投资建议。开户请以各券商官方最新要求为准。</blockquote><h3>为什么要开美股账户</h3><p>直接持有 NVDA、MSFT 这类美股核心资产，需要一个能交易美股的券商账户。国内用户常见三个选择：</p><h3>三家主流券商对比</h3><table class=\"art-table\"><tr><th>券商</th><th>特点</th><th>适合</th></tr><tr><td><strong>忌龚 moomoo</strong></td><td>界面友好、数据全</td><td>新手首选</td></tr><tr><td><strong>盈动老虎</strong></td><td>生态成熟、港美通吃</td><td>进阶</td></tr><tr><td><strong>盈资 Webull</strong></td><td>纯美股、期权强</td><td>期权/进阶</td></tr></table><h3>开户四步</h3><ol><li>准备身份证 + 地址证明</li><li>下载 App 填资料，通常 1-2 天审核</li><li>出入金（电汇 / 第三方渠道）</li><li>入金后即可下单</li></ol><h3>报税提醒</h3><p>美股资本利得、股息的税务处理因人而异，跨境报税详见社区「财税规划」专题。</p><hr/><blockquote>🔒 更深入的<strong>账户架构、跨境资金、身份规划</strong>内容，仅对会员开放，<a href=\"https://ff-club-2026.netlify.app/\" target=\"_blank\" rel=\"noopener\">申请加入财富自由 Club</a>。</blockquote>"
     }
   ],
   "reports": [
