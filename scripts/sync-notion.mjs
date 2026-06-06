@@ -222,7 +222,7 @@ async function main() {
       avatar: getFileUrl(p, '头像'),
       socials,
     };
-  }).filter(m => m.name && m.level !== '已离开' && m.level !== '申请中');
+  }).filter(m => m.name && m.level && !['已离开', '申请中', '驳回'].includes(m.level));
 
   const founders = allMembers.filter(m => m.level === '联合发起人');
   const coreMembers = allMembers.filter(m => m.level === '核心成员' || m.level === 'VIP 会员');
