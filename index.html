@@ -181,6 +181,13 @@
       <h2 class="section-title">核心成员</h2>
       <p class="section-sub" style="margin:0 auto 56px;">排名不分先后 · 持续扩容中</p>
     </div>
+    <div class="ffc-unlock" id="ffc-unlock">
+      <span class="ffc-unlock-hint">🔒 成员名片对外隐去 · 入会后凭邀请码查看全员</span>
+      <div class="ffc-unlock-form">
+        <input id="ffc-unlock-input" type="text" placeholder="输入邀请码解锁" autocomplete="off" />
+        <button class="btn-gold" id="ffc-unlock-btn">解锁</button>
+      </div>
+    </div>
     <div class="members-grid" id="members-grid"></div>
   </div>
 </section>
@@ -373,12 +380,18 @@
       <h2 class="section-title">入会资格</h2>
     </div>
     <div class="pricing-card">
-      <div class="pricing-tier">VIP MEMBERSHIP</div>
+      <div class="pricing-tier">VIP0 · 入会门槛</div>
       <div class="pricing-amount" id="price-amount"></div>
       <p class="pricing-note">"以最克制的价格，进入最稀缺的圈层"</p>
       <div class="pricing-rule" id="price-rule"></div>
       <button class="btn-gold" data-apply style="margin: 8px 0 20px;">立即申请加入</button>
       <div class="pricing-contact">付款方式 · 联系微信 <span class="wechat-id" id="price-wechat"></span></div>
+    </div>
+
+    <div class="value-services">
+      <div class="vs-head">增值服务 · VIP0 入会后按需开通</div>
+      <div id="value-services"></div>
+      <p style="text-align:center;margin-top:14px;font-size:12px;color:var(--bone-3);font-family:var(--font-serif);font-style:italic;">增值服务含算力与研发成本，单独按月计费 · 详情联系微信</p>
     </div>
   </div>
 </section>

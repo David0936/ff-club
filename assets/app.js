@@ -298,7 +298,51 @@ function renderFounders() {
 function renderMembers() {
   const grid = $('#members-grid');
   if (!grid) return;
-  window.FFC_MEMBERS.forEach(m => grid.appendChild(renderMemberCard(m, false)));
+  window.FFC_MEMBERS.forEach(m => {
+    const card = renderMemberCard(m, false);
+    // 公众默认模糊（保留头衔做钩子）；VIP3 顶级 = 官网公开展示位，清晰；解锁后全部清晰
+    if (!window.FFC_UNLOCKED && m.level !== 'VIP3 顶级') card.classList.add('locked');
+    grid.appendChild(card);
+  });
+}
+
+/* ---------- 成员名片解锁（官网软门槛：模糊 + 邀请码） ---------- */
+function initMemberUnlock() {
+  const bar = $('#ffc-unlock');
+  if (!bar) return;
+  if (window.FFC_UNLOCKED) { bar.classList.add('unlocked'); return; }
+  const input = $('#ffc-unlock-input');
+  const btn = $('#ffc-unlock-btn');
+  const codes = (window.FFC_ACCESS?.unlockCodes || []).map(c => String(c).trim().toLowerCase());
+  const tryUnlock = () => {
+    const v = (input?.value || '').trim().toLowerCase();
+    if (v && codes.includes(v)) {
+      localStorage.setItem('ffc_unlocked', '1');
+      window.FFC_UNLOCKED = true;
+      $$('.member-card.locked').forEach(c => c.classList.remove('locked'));
+      bar.classList.add('unlocked');
+    } else {
+      input?.classList.add('err');
+      setTimeout(() => input?.classList.remove('err'), 700);
+    }
+  };
+  btn?.addEventListener('click', tryUnlock);
+  input?.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+}
+
+/* ---------- 增值服务表（定价区） ---------- */
+function renderValueServices() {
+  const box = $('#value-services');
+  if (!box) return;
+  const list = window.FFC_VALUE_SERVICES || [];
+  if (!list.length) return;
+  box.innerHTML = list.map(s => `
+    <div class="vs-row">
+      <span class="vs-tier">${s.tier}</span>
+      <span class="vs-name">${s.name}</span>
+      <span class="vs-desc">${s.desc || ''}</span>
+      <span class="vs-price">${s.price}</span>
+    </div>`).join('');
 }
 
 /* ---------- Render: Keywords Cloud ---------- */
@@ -837,6 +881,7 @@ function initScrollEffects() {
 
 /* ---------- Boot ---------- */
 document.addEventListener('DOMContentLoaded', () => {
+  window.FFC_UNLOCKED = localStorage.getItem('ffc_unlocked') === '1';  // 成员名片解锁态（凭邀请码）
   applyNotionData();   // 先用 Notion 同步数据覆盖（若有）
   renderNetwork();
   renderFounders();
@@ -845,10 +890,12 @@ document.addEventListener('DOMContentLoaded', () => {
   renderConnections();
   renderQuickNav();
   renderPricing();
+  renderValueServices();
   renderArticles();
   renderReports();
   renderTweets();
   initTweetsBoardLink();
+  initMemberUnlock();
   initAdmin();
   initApplyModal();
   initArticleModal();

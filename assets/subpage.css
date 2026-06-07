@@ -319,3 +319,54 @@
   /* 推文/文章/研报网格用了 minmax(320px,…)，超窄屏会溢出被裁 → 单列 */
   .feed-grid, .reports-grid { grid-template-columns: 1fr; }
 }
+
+/* ===== 成员名片软门槛：公众模糊 + 邀请码解锁（新增，未改任何现有规则） ===== */
+.ffc-unlock {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 14px; margin: 0 auto 32px; max-width: 660px; text-align: center;
+  padding: 16px 22px; border: 1px solid var(--gold-3);
+  background: linear-gradient(135deg, rgba(201,163,91,0.08), transparent);
+}
+.ffc-unlock.unlocked { display: none; }
+.ffc-unlock-hint { font-family: var(--font-serif); font-style: italic; color: var(--bone-2); font-size: 14px; }
+.ffc-unlock-form { display: flex; gap: 8px; }
+.ffc-unlock-form input {
+  background: var(--ink-3); border: 1px solid var(--line); color: var(--bone);
+  padding: 8px 14px; font-size: 13px; letter-spacing: 0.08em; outline: none; border-radius: 2px;
+}
+.ffc-unlock-form input:focus { border-color: var(--gold); }
+.ffc-unlock-form input.err { border-color: #eb6f6f; animation: ffcShake .4s; }
+@keyframes ffcShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+.ffc-unlock-form .btn-gold { margin: 0; padding: 8px 18px; }
+
+.member-card.locked { position: relative; }
+.member-card.locked .member-avatar { filter: blur(9px); }
+.member-card.locked .member-name { filter: blur(7px); user-select: none; pointer-events: none; }
+.member-card.locked .member-socials { display: none; }
+.member-card.locked::after {
+  content: "🔒 入会解锁"; position: absolute; top: 10px; right: 10px;
+  font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.12em;
+  color: var(--gold-2); border: 1px solid var(--gold-3); border-radius: 20px;
+  padding: 2px 8px; background: rgba(7,17,30,0.6);
+}
+
+/* ===== 增值服务表（定价区，新增） ===== */
+.value-services { max-width: 720px; margin: 30px auto 0; }
+.value-services .vs-head {
+  text-align: center; font-family: var(--font-display); letter-spacing: 0.3em;
+  color: var(--gold); font-size: 12px; margin-bottom: 16px;
+}
+.vs-row {
+  display: grid; grid-template-columns: 56px 1fr auto; gap: 4px 14px; align-items: baseline;
+  padding: 14px 18px; border: 1px solid var(--line); border-bottom: none; background: var(--ink-2);
+}
+.vs-row:last-child { border-bottom: 1px solid var(--line); }
+.vs-tier { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.1em; color: var(--gold-2); }
+.vs-name { font-family: var(--font-cn); font-size: 15px; color: var(--bone); }
+.vs-desc { grid-column: 2 / 3; font-family: var(--font-serif); font-size: 12px; color: var(--bone-3); }
+.vs-price { grid-row: 1 / 3; align-self: center; font-family: var(--font-cn); font-size: 18px; color: var(--gold); white-space: nowrap; }
+@media (max-width: 480px) {
+  .vs-row { grid-template-columns: 46px 1fr auto; padding: 12px 14px; }
+  .vs-name { font-size: 14px; }
+  .vs-price { font-size: 16px; }
+}
