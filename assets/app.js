@@ -240,33 +240,7 @@ function drawConnectionLines(stage, nFounders, nMembers) {
 }
 
 /* ---------- Render: Founder & Member Cards ---------- */
-function renderMemberCard(p, isFounder = false) {
-  const card = document.createElement('div');
-  card.className = 'member-card' + (isFounder ? ' founder-card' : '');
-  card.id = 'm-' + p.id;
-
-  const avatar = document.createElement('div');
-  avatar.className = 'member-avatar';
-  if (p.avatar) {
-    const img = document.createElement('img');
-    img.src = p.avatar; img.alt = p.name;
-    avatar.appendChild(img);
-  } else {
-    avatar.textContent = initials(p.name, p.en);
-  }
-
-  const name = document.createElement('div');
-  name.className = 'member-name';
-  name.textContent = p.name;
-
-  const en = document.createElement('div');
-  en.className = 'member-name-en';
-  en.textContent = p.en || '';
-
-  const title = document.createElement('div');
-  title.className = 'member-title';
-  title.textContent = p.title;
-
+function buildSocials(p) {
   const socials = document.createElement('div');
   socials.className = 'member-socials';
   const meta = window.FFC_SOCIAL_META;
@@ -285,8 +259,46 @@ function renderMemberCard(p, isFounder = false) {
     el.innerHTML = meta[key].svg;
     socials.appendChild(el);
   });
+  return socials;
+}
 
-  card.append(avatar, name, en, title, socials);
+function renderMemberCard(p, isFounder = false) {
+  const card = document.createElement('div');
+  card.className = 'member-card' + (isFounder ? ' founder-card' : '');
+  card.id = 'm-' + p.id;
+  // 发起人 + VIP3 顶级 = 官网公开展示位，正面全展示；其余核心成员=只露头像+头衔，点开(需解锁)看全部
+  const fullPublic = isFounder || p.level === 'VIP3 顶级';
+
+  const avatar = document.createElement('div');
+  avatar.className = 'member-avatar';
+  if (p.avatar) {
+    const img = document.createElement('img');
+    img.src = p.avatar; img.alt = fullPublic ? p.name : '';
+    avatar.appendChild(img);
+  } else {
+    avatar.textContent = fullPublic ? initials(p.name, p.en) : '★';
+  }
+
+  const title = document.createElement('div');
+  title.className = 'member-title';
+  title.textContent = p.title;
+
+  if (fullPublic) {
+    const name = document.createElement('div');
+    name.className = 'member-name';
+    name.textContent = p.name;
+    const en = document.createElement('div');
+    en.className = 'member-name-en';
+    en.textContent = p.en || '';
+    card.append(avatar, name, en, title, buildSocials(p));
+  } else {
+    const hint = document.createElement('div');
+    hint.className = 'member-hint';
+    hint.textContent = window.FFC_UNLOCKED ? '查看资料 ›' : '🔒 入会查看';
+    card.append(avatar, title, hint);
+    card.classList.add('member-teaser');
+    card.addEventListener('click', () => openMemberDetail(p));
+  }
   return card;
 }
 
@@ -298,12 +310,48 @@ function renderFounders() {
 function renderMembers() {
   const grid = $('#members-grid');
   if (!grid) return;
-  window.FFC_MEMBERS.forEach(m => {
-    const card = renderMemberCard(m, false);
-    // 公众默认模糊（保留头衔做钩子）；VIP3 顶级 = 官网公开展示位，清晰；解锁后全部清晰
-    if (!window.FFC_UNLOCKED && m.level !== 'VIP3 顶级') card.classList.add('locked');
-    grid.appendChild(card);
-  });
+  grid.innerHTML = '';
+  window.FFC_MEMBERS.forEach(m => grid.appendChild(renderMemberCard(m, false)));
+}
+
+/* ---------- 成员资料弹窗（点开核心成员卡片 · 需先解锁） ---------- */
+function openMemberDetail(m) {
+  if (!window.FFC_UNLOCKED) { promptUnlock(); return; }   // 没解锁 → 引导去输邀请码
+  const backdrop = $('#member-modal');
+  const body = $('#member-body');
+  if (!backdrop || !body) return;
+  const meta = window.FFC_SOCIAL_META || {};
+  const socialsHtml = Object.keys(meta).map(key => {
+    const url = m.socials?.[key];
+    return url
+      ? `<a href="${url}" target="_blank" rel="noopener" title="${meta[key].label}">${meta[key].svg}</a>`
+      : `<span class="disabled" title="${meta[key].label} · 待补充">${meta[key].svg}</span>`;
+  }).join('');
+  const tags = (m.fields || []).map(f => `<span>${f}</span>`).join('');
+  body.innerHTML = `
+    <div class="md-avatar">${m.avatar ? `<img src="${m.avatar}" alt="${m.name}">` : initials(m.name, m.en)}</div>
+    <h2>${m.name}</h2>
+    ${m.en ? `<div class="md-en">${m.en}</div>` : ''}
+    <div class="md-title">${m.title || ''}</div>
+    ${tags ? `<div class="md-tags">${tags}</div>` : ''}
+    <div class="md-socials member-socials">${socialsHtml}</div>`;
+  backdrop.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function promptUnlock() {
+  const bar = $('#ffc-unlock');
+  if (!bar) return;
+  bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  bar.classList.add('flash');
+  setTimeout(() => { bar.classList.remove('flash'); $('#ffc-unlock-input')?.focus(); }, 700);
+}
+function initMemberModal() {
+  const backdrop = $('#member-modal');
+  if (!backdrop) return;
+  const doClose = () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; };
+  $('#member-close')?.addEventListener('click', doClose);
+  backdrop.addEventListener('click', e => { if (e.target === backdrop) doClose(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') doClose(); });
 }
 
 /* ---------- 成员名片解锁（官网软门槛：模糊 + 邀请码） ---------- */
@@ -319,7 +367,7 @@ function initMemberUnlock() {
     if (v && codes.includes(v)) {
       localStorage.setItem('ffc_unlocked', '1');
       window.FFC_UNLOCKED = true;
-      $$('.member-card.locked').forEach(c => c.classList.remove('locked'));
+      renderMembers();   // 重渲染卡片，提示语变"查看资料 ›"，点开即出详情
       bar.classList.add('unlocked');
     } else {
       input?.classList.add('err');
@@ -900,6 +948,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initApplyModal();
   initArticleModal();
   initBuilderModal();
+  initMemberModal();
   initFaq();
   initMobileNav();
   initScrollEffects();

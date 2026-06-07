@@ -339,16 +339,28 @@
 @keyframes ffcShake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
 .ffc-unlock-form .btn-gold { margin: 0; padding: 8px 18px; }
 
-.member-card.locked { position: relative; }
-.member-card.locked .member-avatar { filter: blur(9px); }
-.member-card.locked .member-name { filter: blur(7px); user-select: none; pointer-events: none; }
-.member-card.locked .member-socials { display: none; }
-.member-card.locked::after {
-  content: "🔒 入会解锁"; position: absolute; top: 10px; right: 10px;
-  font-family: var(--font-sans); font-size: 10px; letter-spacing: 0.12em;
-  color: var(--gold-2); border: 1px solid var(--gold-3); border-radius: 20px;
-  padding: 2px 8px; background: rgba(7,17,30,0.6);
+/* 核心成员卡：正面只露头像+头衔，点开(需解锁)看全部 */
+.member-card.member-teaser { cursor: pointer; }
+.member-hint {
+  margin-top: 12px; font-family: var(--font-sans); font-size: 11px;
+  letter-spacing: 0.12em; color: var(--gold-2);
 }
+.ffc-unlock.flash { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,163,91,0.25); animation: ffcShake .5s; }
+
+/* 成员资料弹窗（点开后） */
+.member-detail-modal { max-width: 460px; text-align: center; }
+.md-avatar {
+  width: 120px; height: 120px; margin: 6px auto 18px; border-radius: 50%;
+  border: 1px solid var(--gold); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 38px; color: var(--gold); background: var(--ink-3);
+}
+.md-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.md-en { font-family: var(--font-display); letter-spacing: 0.3em; color: var(--bone-3); font-size: 12px; margin-bottom: 12px; }
+.md-title { font-family: var(--font-serif); color: var(--bone-2); font-size: 15px; margin-bottom: 16px; }
+.md-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 18px; }
+.md-tags span { font-family: var(--font-sans); font-size: 11px; color: var(--gold-2); border: 1px solid var(--line); padding: 3px 10px; border-radius: 2px; }
+.md-socials { display: flex; gap: 10px; justify-content: center; }
 
 /* ===== 增值服务表（定价区，新增） ===== */
 .value-services { max-width: 720px; margin: 30px auto 0; }
