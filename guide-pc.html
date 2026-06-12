@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FFC 完整指南 · 介绍 + 成员上手 + 合作方案</title>
+<link rel="preconnect" href="https://fonts.loli.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--ink:#07111E;--ink2:#0E1A2B;--ink3:#15243A;--bone:#F2EBDA;--bone2:#C9BFA8;--bone3:#807660;--gold:#C9A35B;--gold2:#E5C77E;--gold3:#8A6F3A;--line:rgba(201,163,91,.20);--line2:rgba(201,163,91,.08);--cn:'Noto Serif SC','Songti SC',serif;--en:'Cinzel',serif;--serif:'Cormorant Garamond',serif;--sans:'Inter','PingFang SC',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#02060c;color:var(--bone);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.deck{width:1920px;height:1080px;position:relative;transform-origin:center center}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:104px 130px;background:radial-gradient(ellipse at 20% 0%,rgba(201,163,91,.07),transparent 55%),radial-gradient(ellipse at 90% 100%,rgba(30,58,46,.12),transparent 60%),var(--ink);overflow:hidden}
+.slide.active{display:flex;animation:fade .5s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.eyebrow{font-family:var(--sans);font-size:20px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:26px}
+.title{font-family:var(--cn);font-weight:500;font-size:78px;line-height:1.15;letter-spacing:.05em;color:var(--bone)}
+.title .g{background:linear-gradient(180deg,var(--gold2),var(--gold) 50%,var(--gold3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-family:var(--serif);font-size:32px;color:var(--bone2);margin-top:26px;line-height:1.5;font-style:italic}
+.rule{height:1px;width:120px;background:linear-gradient(90deg,var(--gold),transparent);margin:36px 0}
+.pageno{position:absolute;bottom:54px;right:70px;font-family:var(--en);font-size:18px;letter-spacing:.3em;color:var(--bone3)}
+.brandfoot{position:absolute;bottom:50px;left:70px;font-family:var(--en);font-size:15px;letter-spacing:.35em;color:var(--gold3)}
+.crest{width:30px;height:30px;border:1px solid var(--gold);display:inline-flex;align-items:center;justify-content:center;font-family:var(--en);font-size:12px;color:var(--gold);vertical-align:middle;margin-right:14px}
+.cover{align-items:center;text-align:center;justify-content:center}
+.cover .mark{width:96px;height:108px;border:1.5px solid var(--gold);position:relative;margin-bottom:40px;display:flex;align-items:center;justify-content:center}
+.cover .mark span{font-family:var(--en);font-size:34px;letter-spacing:.05em;color:var(--gold)}
+.cover .mark::before,.cover .mark::after{content:"";position:absolute;width:16px;height:16px;border:1px solid var(--gold2)}
+.cover .mark::before{top:-7px;left:-7px;border-right:none;border-bottom:none}
+.cover .mark::after{bottom:-7px;right:-7px;border-left:none;border-top:none}
+.cover h1{font-family:var(--cn);font-weight:600;font-size:110px;letter-spacing:.14em;background:linear-gradient(180deg,var(--gold2),var(--gold) 45%,var(--gold3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 80px rgba(201,163,91,.15)}
+.cover .en{font-family:var(--en);font-size:23px;letter-spacing:.5em;color:var(--bone2);margin:26px 0 32px;padding-left:.5em}
+.cover .tags{display:flex;gap:42px;font-family:var(--serif);font-size:30px;letter-spacing:.12em;color:var(--bone)}
+.cover .tags span{position:relative}
+.cover .tags span+span::before{content:"·";position:absolute;left:-24px;color:var(--gold)}
+.cover .est{margin-top:50px;font-family:var(--en);letter-spacing:.5em;font-size:18px;color:var(--gold3)}
+.cover .sub{text-align:center}
+/* 章节分隔页 */
+.divider{align-items:center;text-align:center;justify-content:center}
+.divider .part{font-family:var(--en);font-size:26px;letter-spacing:.6em;color:var(--gold);margin-bottom:36px}
+.divider h2{font-family:var(--cn);font-size:100px;font-weight:500;letter-spacing:.1em;background:linear-gradient(180deg,var(--gold2),var(--gold) 45%,var(--gold3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.divider .dsub{font-family:var(--serif);font-size:32px;color:var(--bone2);margin-top:30px;font-style:italic}
+.grid{display:grid;gap:28px;margin-top:46px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--ink2),var(--ink));padding:36px 34px;position:relative}
+.card .num{font-family:var(--en);color:var(--gold);font-size:19px;letter-spacing:.25em;margin-bottom:16px}
+.card .ic{font-size:34px;margin-bottom:14px}
+.card h3{font-family:var(--cn);font-size:32px;font-weight:500;color:var(--bone);margin-bottom:12px;letter-spacing:.04em}
+.card p{font-family:var(--serif);font-size:24px;line-height:1.55;color:var(--bone2)}
+.card.hl{border-color:var(--gold)}
+.tiers{display:flex;flex-direction:column;gap:18px;margin-top:46px}
+.tier{display:flex;align-items:center;gap:34px;border:1px solid var(--line);background:var(--ink2);padding:26px 38px}
+.tier .lv{font-family:var(--en);font-size:30px;color:var(--gold);width:200px;flex-shrink:0;letter-spacing:.08em}
+.tier .nm{font-family:var(--cn);font-size:30px;color:var(--bone);width:150px;flex-shrink:0}
+.tier .ds{font-family:var(--serif);font-size:26px;color:var(--bone2);line-height:1.4}
+.tier.t0{border-left:3px solid var(--bone3)}.tier.t1{border-left:3px solid #5b8f6f}
+.tier.t2{border-left:3px solid var(--gold)}.tier.t3{border-left:3px solid #b5503f}
+.price{align-items:center;text-align:center}
+.price .amt{font-family:var(--cn);font-size:200px;line-height:1;color:var(--bone);letter-spacing:.02em;margin:30px 0}
+.price .amt .c{font-size:70px;color:var(--gold);vertical-align:super}
+.price .amt .u{font-size:40px;color:var(--bone2)}
+.price .note{font-family:var(--serif);font-style:italic;font-size:32px;color:var(--bone2)}
+.price .rule2{font-family:var(--cn);font-size:26px;color:var(--gold2);margin-top:26px;letter-spacing:.06em}
+.steps3{display:flex;gap:0;margin-top:56px}
+.step{flex:1;text-align:center;padding:0 30px;position:relative}
+.step:not(:first-child)::before{content:"";position:absolute;left:0;top:46px;width:1px;height:160px;background:var(--line2)}
+.step .roman{font-family:var(--en);font-size:64px;color:var(--gold);margin-bottom:24px}
+.step h4{font-family:var(--cn);font-size:34px;color:var(--bone);margin-bottom:16px;font-weight:500}
+.step p{font-family:var(--serif);font-size:24px;color:var(--bone2);line-height:1.5}
+.modlist{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 60px;margin-top:48px}
+.mod{display:flex;align-items:baseline;gap:20px;border-bottom:1px solid var(--line2);padding-bottom:18px}
+.mod .ic{font-size:30px;width:46px}
+.mod .t{font-family:var(--cn);font-size:30px;color:var(--bone)}
+.mod .d{font-family:var(--serif);font-size:22px;color:var(--bone3);margin-left:auto}
+.quote{align-items:center;text-align:center;justify-content:center}
+.quote .qm{font-family:var(--en);font-size:160px;color:var(--gold);line-height:.5;opacity:.5;margin-bottom:30px}
+.quote .qt{font-family:var(--cn);font-size:54px;line-height:1.7;color:var(--bone);font-weight:400;max-width:1350px}
+.quote .qt em{font-style:normal;color:var(--gold2);font-weight:500}
+.quote .qs{margin-top:44px;font-family:var(--en);letter-spacing:.5em;font-size:18px;color:var(--bone2)}
+.rows{display:flex;flex-direction:column;gap:20px;margin-top:44px}
+.row{display:flex;align-items:flex-start;gap:30px;border:1px solid var(--line);background:var(--ink2);padding:28px 40px}
+.row .n{font-family:var(--en);font-size:40px;color:var(--gold);width:64px;flex-shrink:0;line-height:1.2}
+.row .c h3{font-family:var(--cn);font-size:34px;color:var(--bone);font-weight:500;margin-bottom:8px}
+.row .c p{font-family:var(--serif);font-size:25px;color:var(--bone2);line-height:1.5}
+.row .c .hi{color:var(--gold2)}
+.arch{display:flex;align-items:center;justify-content:center;margin-top:56px}
+.arch .box{flex:1;border:1px solid var(--gold3);background:var(--ink2);padding:44px 34px;text-align:center}
+.arch .box.b1{border-color:var(--gold)}
+.arch .box h3{font-family:var(--cn);font-size:34px;color:var(--bone);margin-bottom:12px}
+.arch .box p{font-family:var(--serif);font-size:22px;color:var(--bone2);line-height:1.45}
+.arch .mid{flex:0 0 200px;text-align:center;color:var(--gold)}
+.arch .mid .a{font-size:40px;line-height:1}
+.arch .mid .l{font-size:16px;letter-spacing:.15em;color:var(--gold2);margin-top:10px}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:48px}
+.stat .s{border:1px solid var(--line);background:var(--ink2);padding:36px;text-align:center}
+.stat .s .v{font-family:var(--cn);font-size:64px;color:var(--gold2);line-height:1}
+.stat .s .k{font-family:var(--serif);font-size:24px;color:var(--bone2);margin-top:12px}
+.biz{display:flex;flex-direction:column;gap:18px;margin-top:42px}
+.biz .b{display:flex;align-items:center;gap:30px;border:1px solid var(--line);background:var(--ink2);padding:26px 38px}
+.biz .b .t{font-family:var(--cn);font-size:30px;color:var(--gold2);width:260px;flex-shrink:0}
+.biz .b .d{font-family:var(--serif);font-size:25px;color:var(--bone2)}
+.cta{align-items:center;text-align:center;justify-content:center}
+.cta .wx{margin-top:36px;display:inline-block;border:1px solid var(--gold);padding:22px 48px;font-family:var(--sans);font-size:30px;letter-spacing:.1em;color:var(--gold2)}
+.cta .wx b{color:var(--gold);user-select:all}
+.nav{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;z-index:50;background:rgba(7,17,30,.7);border:1px solid var(--line);border-radius:40px;padding:8px 18px;backdrop-filter:blur(8px)}
+.nav button{background:none;border:none;color:var(--gold);font-size:20px;cursor:pointer;padding:4px 10px}
+.nav .ind{font-family:var(--en);font-size:14px;letter-spacing:.2em;color:var(--bone2);min-width:74px;text-align:center}
+@media print{.nav{display:none}.stage{position:static}.deck{transform:none!important}.slide{display:flex!important;position:relative;page-break-after:always;width:1920px;height:1080px}}
+</style>
+</head>
+<body>
+<div class="stage"><div class="deck" id="deck">
+
+<!-- ============ 总封面 ============ -->
+<section class="slide cover active">
+  <div class="mark"><span>FFC</span></div>
+  <h1>财富自由俱乐部</h1>
+  <div class="en">THE · COMPLETE · GUIDE</div>
+  <div class="tags"><span>俱乐部介绍</span><span>成员上手</span><span>合作方案</span></div>
+  <div class="est">完整指南 · EST · MMXXVI</div>
+</section>
+
+<!-- ============ PART I 介绍 ============ -->
+<section class="slide divider">
+  <div class="part">PART · I</div>
+  <h2>俱乐部介绍</h2>
+  <div class="dsub">我们是谁 · 会员权益 · 如何加入</div>
+</section>
+
+<section class="slide quote">
+  <div class="qm">"</div>
+  <div class="qt">财富的本质，是<em>关系的密度</em>。<br/>我们不做流量场，只做<em>圈层筛选</em>。</div>
+  <div class="qs">THE FFC MANIFESTO</div>
+  <div class="brandfoot"><span class="crest">FFC</span>FINANCIAL FREEDOM CLUB</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Who We Are</div>
+  <div class="title">一个 <span class="g">高净值认知共同体</span></div>
+  <div class="rule"></div>
+  <div class="grid g3">
+    <div class="card"><div class="num">I</div><h3>一手信息</h3><p>美股 / 港股 / Crypto / 一级市场，机构级研究与一线观点直达。</p></div>
+    <div class="card"><div class="num">II</div><h3>顶级圈层</h3><p>发起人 50W+ 粉丝、九位数 AUM；核心成员遍布硅谷与全球。</p></div>
+    <div class="card"><div class="num">III</div><h3>AI 提效</h3><p>把投研、内容、工具用 AI 武装到牙齿，认知与效率双杀。</p></div>
+  </div>
+</section>
+
+<section class="slide quote">
+  <div class="eyebrow" style="margin-bottom:50px">The Constellation</div>
+  <div class="qt">加入俱乐部 —<br/>你与<em>明星 · 政商 · 资本 · 高管</em>之间，<br/>只剩<em>六个握手</em>。</div>
+  <div class="qs">SIX DEGREES TO THE WORLD</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Membership Tiers</div>
+  <div class="title">会员权益 · <span class="g">四档阶梯</span></div>
+  <div class="tiers">
+    <div class="tier t0"><span class="lv">VIP 0</span><span class="nm">入门</span><span class="ds">📚 知识库（科普 · 经典文档 · 财富书单）</span></div>
+    <div class="tier t1"><span class="lv">VIP 1</span><span class="nm">进阶</span><span class="ds">+ 👥 成员资料 + 📊 投研内容（财富日历 / 研报 / 点名追踪 / 标的池）</span></div>
+    <div class="tier t2"><span class="lv">VIP 2</span><span class="nm">实时</span><span class="ds">+ 🐦 推特投研（官方推荐 + 自定义博主，AI 解析立场/置信度）</span></div>
+    <div class="tier t3"><span class="lv">VIP 3</span><span class="nm">顶级</span><span class="ds">+ 💎 付费博主订阅 + 👑 大佬资料 / 引荐背书</span></div>
+  </div>
+</section>
+
+<section class="slide price">
+  <div class="eyebrow">Membership</div>
+  <div class="amt"><span class="c">¥</span>2,980<span class="u">/ 年</span></div>
+  <div class="note">"以最克制的价格，进入最稀缺的圈层"</div>
+  <div class="rule2">每加入 10 位新成员 · 价格升至 ¥3,480 —— 早加入，永远更低</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">The System</div>
+  <div class="title">两个入口，<span class="g">一套系统</span></div>
+  <div class="rule"></div>
+  <div class="grid g2">
+    <div class="card hl"><div class="num">A · 对外</div><h3>🌐 官网</h3><p>老钱风引流门面：关系网络、关键词云、外圈人脉、深度文章、申请入会。<br/><span style="color:var(--gold2)">ff-club-2026.netlify.app</span></p></div>
+    <div class="card hl"><div class="num">B · 对内</div><h3>📚 Notion 知识库</h3><p>会员专属：财富日历、研报、推特投研、智能体、股票课、学员名录 —— 全部在一个空间。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Knowledge Base · Notion</div>
+  <div class="title">知识库 · <span class="g">八大模块</span></div>
+  <div class="modlist">
+    <div class="mod"><span class="ic">🤖</span><span class="t">AI 工具教程</span><span class="d">GPT / Claude / 🪜</span></div>
+    <div class="mod"><span class="ic">📚</span><span class="t">Notion 课程导航</span><span class="d">第二大脑</span></div>
+    <div class="mod"><span class="ic">💼</span><span class="t">商业知识库</span><span class="d">标的池/研报/书单/课</span></div>
+    <div class="mod"><span class="ic">📅</span><span class="t">财富日历</span><span class="d">CPI/FOMC/财报季</span></div>
+    <div class="mod"><span class="ic">🎤</span><span class="t">大佬点名追踪</span><span class="d">黄仁勋 × Trump</span></div>
+    <div class="mod"><span class="ic">📈</span><span class="t">生态股价 / 推特投研</span><span class="d">折线图 / AI 解析</span></div>
+    <div class="mod"><span class="ic">🎨</span><span class="t">AI 智能体画廊</span><span class="d">成员调教上架</span></div>
+    <div class="mod"><span class="ic">👥</span><span class="t">学员集合</span><span class="d">问卷/审核/名录</span></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Signature Features</div>
+  <div class="title">三个 <span class="g">招牌功能</span></div>
+  <div class="grid g3">
+    <div class="card"><div class="num">★</div><h3>🎤 大佬点名追踪</h3><p>黄仁勋(绿)/Trump(红)/政府(黄) 公开点名哪家公司 + 当时股价反应，每点名 +2 热度。</p></div>
+    <div class="card"><div class="num">★</div><h3>🐦 AI 推特投研</h3><p>把博主推文用 AI 读成结构化投研：标的 + 看多看空 + 置信度 + 公司速读。</p></div>
+    <div class="card"><div class="num">★</div><h3>📈 股票交易小课堂</h3><p>44 节系统课，中文精讲 + 英文原文 + 视频，读完打卡上排行榜。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">How to Join</div>
+  <div class="title">三步 <span class="g">进入 FFC</span></div>
+  <div class="steps3">
+    <div class="step"><div class="roman">I</div><h4>提交申请</h4><p>官网点「申请加入」→ 填写 Notion 问卷（含 Notion 邮箱）。</p></div>
+    <div class="step"><div class="roman">II</div><h4>发起人审阅</h4><p>4 位联合发起人共同审阅，48 小时内回复，定 VIP 等级。</p></div>
+    <div class="step"><div class="roman">III</div><h4>入会解锁</h4><p>微信付费 → 邮箱自动邀请进 Notion 空间 → 按等级解锁内容。</p></div>
+  </div>
+</section>
+
+<!-- ============ PART II 成员上手 ============ -->
+<section class="slide divider">
+  <div class="part">PART · II</div>
+  <h2>成员上手指南</h2>
+  <div class="dsub">填表 · 用 Notion · 用官网，10 分钟跑起来</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Step 1 · 填申请表</div>
+  <div class="title">第一步 · <span class="g">认真填问卷</span></div>
+  <div class="rows">
+    <div class="row"><div class="n">!</div><div class="c"><h3>Notion 邮箱（最重要）</h3><p>务必填<span class="hi">你登录 Notion 的邮箱</span> —— 我们靠它邀请你进社群空间。没有就花 2 元买个教育邮箱。</p></div></div>
+    <div class="row"><div class="n">+</div><div class="c"><h3>社媒 + 一句话介绍</h3><p>填了的社媒会显示在官网成员卡上（一键跳转）；一句话讲清你是谁、在做什么。</p></div></div>
+    <div class="row"><div class="n">★</div><div class="c"><h3>名人合影（可多张）</h3><p>与名人/政商/资本的合影上传到「名人合影」字段，审核通过后上官网外圈人脉，角标是你的昵称。</p></div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Step 2 · 进 Notion 空间</div>
+  <div class="title">第二步 · <span class="g">接受邀请</span></div>
+  <div class="grid g2">
+    <div class="card"><div class="ic">📧</div><h3>收邀请邮件</h3><p>审核通过 + 付费后，你的 Notion 邮箱会收到邀请 → 点 Accept 即可进入「财富自由 Club」空间。</p></div>
+    <div class="card"><div class="ic">🔓</div><h3>按等级解锁</h3><p>你能看到的内容由 VIP 等级决定：VIP0 知识库 → VIP1 投研 → VIP2 推特实时 → VIP3 大佬资料。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Notion 基础</div>
+  <div class="title">Notion · <span class="g">三个核心操作</span></div>
+  <div class="grid g3">
+    <div class="card"><div class="ic">📂</div><h3>左侧栏导航</h3><p>所有模块在左边侧栏，点开即看。手机装 Notion App 体验更好。</p></div>
+    <div class="card"><div class="ic">🔀</div><h3>切换视图</h3><p>数据库顶部有多个 Tab（表格/看板/日历/画廊），点不同 Tab 换不同看法。</p></div>
+    <div class="card"><div class="ic">🔍</div><h3>搜索</h3><p>Cmd/Ctrl+P 或顶部搜索框，关键词直达任何内容。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">逛什么</div>
+  <div class="title">知识库 · <span class="g">按等级解锁</span></div>
+  <div class="rows">
+    <div class="row"><div class="n">0</div><div class="c"><h3>VIP0 · 知识库</h3><p>商业经典文档、财富书单、AI 工具教程、股票交易小课堂（44 节）。</p></div></div>
+    <div class="row"><div class="n">1</div><div class="c"><h3>VIP1 · 投研</h3><p>财富日历、会员研报、大佬点名追踪、生态股价、核心标的池 + 成员资料。</p></div></div>
+    <div class="row"><div class="n">2</div><div class="c"><h3>VIP2 · 推特实时</h3><p>AI 推特投研看板，还能往「订阅博主池」加你自己想追的 X 账号。</p></div></div>
+    <div class="row"><div class="n">3</div><div class="c"><h3>VIP3 · 顶级</h3><p>付费博主订阅 + 大佬资料 / 引荐背书。</p></div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">学起来</div>
+  <div class="title">股票课 · <span class="g">读完打卡上榜</span></div>
+  <div class="grid g2">
+    <div class="card"><div class="ic">📈</div><h3>44 节系统课</h3><p>每节：上方中文精讲，文末折叠英文原文，中间穿插视频。从第 1 课顺序学起。</p></div>
+    <div class="card"><div class="ic">✅</div><h3>读完打卡</h3><p>读完在「阅读打卡」记一条 → 自动进「🏆 阅读排行榜」，看谁学得最猛。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Step 3 · 用官网</div>
+  <div class="title">第三步 · <span class="g">逛官网门面</span></div>
+  <div class="grid g3">
+    <div class="card"><div class="ic">🕸️</div><h3>关系网络</h3><p>看发起人+核心成员的圈层星图，点节点跳到对应成员。</p></div>
+    <div class="card"><div class="ic">📰</div><h3>深度文章</h3><p>公开科普可直接读；会员研报露标题钩子，点击进社区看全文。</p></div>
+    <div class="card"><div class="ic">📸</div><h3>外圈人脉</h3><p>成员真实合影墙，点开滑看，角标显示上传者。</p></div>
+  </div>
+</section>
+
+<section class="slide cover">
+  <div class="eyebrow">需要帮助？</div>
+  <div class="title" style="text-align:center">遇到问题 · <span class="g">找 David 小鱼</span></div>
+  <div class="sub" style="text-align:center">社群维护者 · 网站 & Notion 运营<br/>或参考每周私享会集中答疑</div>
+  <div class="brandfoot">FINANCIAL FREEDOM CLUB</div>
+</section>
+
+<!-- ============ PART III 合作方案 ============ -->
+<section class="slide divider">
+  <div class="part">PART · III</div>
+  <h2>合作方案</h2>
+  <div class="dsub">Community OS · 为其他社群搭建「官网 + Notion」组合系统</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">The Problem</div>
+  <div class="title">知识付费社群的 <span class="g">四个痛点</span></div>
+  <div class="grid g2">
+    <div class="card"><div class="ic">🪧</div><h3>没门面</h3><p>只有微信群，没有体面的对外窗口，招不来高质量成员。</p></div>
+    <div class="card"><div class="ic">🗂️</div><h3>内容散</h3><p>资料散在群文件、网盘、文档里，找不到、沉不下来。</p></div>
+    <div class="card"><div class="ic">🔒</div><h3>权限难管</h3><p>不同付费档位看不同内容，纯靠人工，一多就乱。</p></div>
+    <div class="card"><div class="ic">💸</div><h3>变现单一</h3><p>一次性门槛费收完就结束，没有持续的分级与续费。</p></div>
+  </div>
+</section>
+
+<section class="slide quote">
+  <div class="eyebrow" style="margin-bottom:46px">The Solution</div>
+  <div class="qt">一套<em>门面官网</em>负责引流与筛选，<br/>一套 <em>Notion 中台</em>负责内容、会员与权限，<br/>中间用<em>自动化</em>打通 —— <em>零运维</em>。</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Architecture</div>
+  <div class="title">组合架构 · <span class="g">一图看懂</span></div>
+  <div class="arch">
+    <div class="box b1"><h3>🌐 官网</h3><p>对外门面<br/>引流 · 筛选 · 申请漏斗</p></div>
+    <div class="mid"><div class="a">⇄</div><div class="l">GITHUB ACTION<br/>自动同步</div></div>
+    <div class="box"><h3>📚 Notion 中台</h3><p>对内中枢<br/>内容 · 会员 CRM · 权限</p></div>
+  </div>
+  <div class="sub" style="text-align:center;margin-top:46px">在 Notion 写 → 自动同步 → 官网更新。无服务器、无数据库、无运维。</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Monetization</div>
+  <div class="title">分级变现 · <span class="g">从一次性到持续</span></div>
+  <div class="biz">
+    <div class="b"><span class="t">VIP 阶梯</span><span class="d">VIP0→3 不同付费档解锁不同内容，自然向上付费。</span></div>
+    <div class="b"><span class="t">动态定价</span><span class="d">每加入 N 人涨价，制造稀缺与早鸟动机。</span></div>
+    <div class="b"><span class="t">续费 + 分润</span><span class="d">年费续费 + 顶级会员引荐大佬分润，收入多元。</span></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Cost Structure</div>
+  <div class="title">成本结构 · <span class="g">近乎零运维</span></div>
+  <div class="stat">
+    <div class="s"><div class="v">¥0</div><div class="k">官网托管<br/>Netlify / Vercel 免费</div></div>
+    <div class="s"><div class="v">¥0</div><div class="k">自动同步<br/>GitHub Actions 免费</div></div>
+    <div class="s"><div class="v">低</div><div class="k">内容中台<br/>Notion 订阅即可</div></div>
+  </div>
+  <div class="sub" style="text-align:center;margin-top:42px">没有服务器、没有后端、没有数据库 —— 一个人就能维护一个几百人的付费社群。</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Case Study</div>
+  <div class="title">已落地案例 · <span class="g">财富自由俱乐部</span></div>
+  <div class="grid g4">
+    <div class="card hl"><div class="num">官网</div><h3>老钱风门面</h3><p>关系网 + 研报 + 推特投研，已上线。</p></div>
+    <div class="card hl"><div class="num">中台</div><h3>8 大模块</h3><p>日历/点名/股价/课程/CRM 全跑通。</p></div>
+    <div class="card hl"><div class="num">自动化</div><h3>同步管道</h3><p>Notion 写 → 自动部署，已验证。</p></div>
+    <div class="card hl"><div class="num">变现</div><h3>VIP 分级</h3><p>¥2980/年 + 动态定价，已设。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Why Us</div>
+  <div class="title">交付方 · <span class="g">David 小鱼 · AI Builder</span></div>
+  <div class="grid g3">
+    <div class="card"><div class="ic">⚙️</div><h3>全栈交付</h3><p>网站开发 + Notion 系统 + 自动化，一个人闭环。</p></div>
+    <div class="card"><div class="ic">🧠</div><h3>精通 AI</h3><p>把 AI 投研、智能体、内容生产嵌进社群，做出别人没有的功能。</p></div>
+    <div class="card"><div class="ic">✅</div><h3>已验证</h3><p>FFC 是亲手跑通的样板，不是 PPT 概念。</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Business Model</div>
+  <div class="title">合作模式 · <span class="g">给其他社群搭建</span></div>
+  <div class="biz">
+    <div class="b"><span class="t">建站交付费</span><span class="d">一次性搭好官网 + Notion 中台 + 自动化管道。</span></div>
+    <div class="b"><span class="t">年度维护</span><span class="d">持续迭代、功能升级、技术保障。</span></div>
+    <div class="b"><span class="t">收入分成 / 投资</span><span class="d">深度绑定的社群，可谈营收分成或股权合作。</span></div>
+  </div>
+</section>
+
+<!-- ============ 总 CTA ============ -->
+<section class="slide cta">
+  <div class="eyebrow">Connecting Top Minds</div>
+  <div class="title" style="text-align:center">链接顶尖智慧 · <span class="g">共创财富未来</span></div>
+  <div class="sub" style="text-align:center">入会 / 合作 / 投资洽谈</div>
+  <div class="wx">联系微信 <b>dragon-yu-171728</b></div>
+  <div class="est" style="margin-top:44px;font-family:var(--en);letter-spacing:.5em;color:var(--gold3)">ff-club-2026.netlify.app · EST · MMXXVI</div>
+</section>
+
+</div></div>
+<div class="nav"><button id="prev">‹</button><span class="ind" id="ind"></span><button id="next">›</button></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let i=0;const ind=document.getElementById('ind');
+const N=slides.length;
+slides.forEach((s,idx)=>{const p=document.createElement('div');p.className='pageno';p.textContent=String(idx+1).padStart(2,'0');s.appendChild(p);});
+function show(n){slides[i].classList.remove('active');i=(n+N)%N;slides[i].classList.add('active');ind.textContent=String(i+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');}
+show(0);
+document.getElementById('next').onclick=()=>show(i+1);document.getElementById('prev').onclick=()=>show(i-1);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(i+1);else if(e.key==='ArrowLeft')show(i-1);});
+// 触屏滑动翻页
+let tx=null;addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(dx<-40)show(i+1);else if(dx>40)show(i-1);tx=null;});
+function fit(){const d=document.getElementById('deck');const s=Math.min(innerWidth/1920,innerHeight/1080);d.style.transform='scale('+s+')';}
+addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>
