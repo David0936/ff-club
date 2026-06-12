@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>财富自由俱乐部 · 介绍 & 使用教学</title>
+<link rel="preconnect" href="https://fonts.loli.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#07111E; --ink2:#0E1A2B; --ink3:#15243A;
+  --bone:#F2EBDA; --bone2:#C9BFA8; --bone3:#807660;
+  --gold:#C9A35B; --gold2:#E5C77E; --gold3:#8A6F3A;
+  --line:rgba(201,163,91,.20); --line2:rgba(201,163,91,.08);
+  --cn:'Noto Serif SC','Songti SC',serif;
+  --en:'Cinzel',serif; --serif:'Cormorant Garamond',serif;
+  --sans:'Inter','PingFang SC',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#02060c;color:var(--bone);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+/* 舞台：等比缩放 1920x1080 */
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.deck{width:1920px;height:1080px;position:relative;transform-origin:center center}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;
+  padding:110px 130px;background:
+   radial-gradient(ellipse at 20% 0%,rgba(201,163,91,.07),transparent 55%),
+   radial-gradient(ellipse at 90% 100%,rgba(30,58,46,.12),transparent 60%),
+   var(--ink);overflow:hidden}
+.slide.active{display:flex;animation:fade .5s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.slide::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 .79 0 0 0 0 .64 0 0 0 0 .36 0 0 0 .05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode:overlay;opacity:.5}
+/* 通用元素 */
+.eyebrow{font-family:var(--sans);font-size:20px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:28px}
+.title{font-family:var(--cn);font-weight:500;font-size:84px;line-height:1.15;letter-spacing:.06em;color:var(--bone)}
+.title .g{background:linear-gradient(180deg,var(--gold2),var(--gold) 50%,var(--gold3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-family:var(--serif);font-size:34px;color:var(--bone2);margin-top:30px;line-height:1.5;font-style:italic}
+.rule{height:1px;width:120px;background:linear-gradient(90deg,var(--gold),transparent);margin:40px 0}
+.pageno{position:absolute;bottom:54px;right:70px;font-family:var(--en);font-size:18px;letter-spacing:.3em;color:var(--bone3)}
+.brandfoot{position:absolute;bottom:50px;left:70px;font-family:var(--en);font-size:16px;letter-spacing:.35em;color:var(--gold3)}
+.crest{width:30px;height:30px;border:1px solid var(--gold);display:inline-flex;align-items:center;justify-content:center;font-family:var(--en);font-size:12px;color:var(--gold);vertical-align:middle;margin-right:14px}
+/* 封面 */
+.cover{align-items:center;text-align:center;justify-content:center}
+.cover .mark{width:96px;height:108px;border:1.5px solid var(--gold);position:relative;margin-bottom:40px;display:flex;align-items:center;justify-content:center}
+.cover .mark span{font-family:var(--en);font-size:34px;letter-spacing:.05em;color:var(--gold)}
+.cover .mark::before,.cover .mark::after{content:"";position:absolute;width:16px;height:16px;border:1px solid var(--gold2)}
+.cover .mark::before{top:-7px;left:-7px;border-right:none;border-bottom:none}
+.cover .mark::after{bottom:-7px;right:-7px;border-left:none;border-top:none}
+.cover h1{font-family:var(--cn);font-weight:600;font-size:118px;letter-spacing:.16em;background:linear-gradient(180deg,var(--gold2),var(--gold) 45%,var(--gold3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 0 80px rgba(201,163,91,.15)}
+.cover .en{font-family:var(--en);font-size:24px;letter-spacing:.55em;color:var(--bone2);margin:26px 0 36px;padding-left:.55em}
+.cover .tags{display:flex;gap:42px;font-family:var(--serif);font-size:30px;letter-spacing:.12em;color:var(--bone)}
+.cover .tags span{position:relative}
+.cover .tags span+span::before{content:"·";position:absolute;left:-24px;color:var(--gold)}
+.cover .est{margin-top:54px;font-family:var(--en);letter-spacing:.5em;font-size:18px;color:var(--gold3)}
+/* 网格/卡片 */
+.grid{display:grid;gap:30px;margin-top:54px}
+.g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--ink2),var(--ink));padding:38px 36px;position:relative}
+.card .num{font-family:var(--en);color:var(--gold);font-size:20px;letter-spacing:.25em;margin-bottom:18px}
+.card h3{font-family:var(--cn);font-size:34px;font-weight:500;color:var(--bone);margin-bottom:14px;letter-spacing:.04em}
+.card p{font-family:var(--serif);font-size:24px;line-height:1.55;color:var(--bone2)}
+.card.hl{border-color:var(--gold)}
+/* 阶梯 */
+.tiers{display:flex;flex-direction:column;gap:18px;margin-top:48px}
+.tier{display:flex;align-items:center;gap:34px;border:1px solid var(--line);background:var(--ink2);padding:26px 38px}
+.tier .lv{font-family:var(--en);font-size:30px;color:var(--gold);width:200px;flex-shrink:0;letter-spacing:.08em}
+.tier .nm{font-family:var(--cn);font-size:30px;color:var(--bone);width:150px;flex-shrink:0}
+.tier .ds{font-family:var(--serif);font-size:26px;color:var(--bone2);line-height:1.4}
+.tier.t0{border-left:3px solid var(--bone3)} .tier.t1{border-left:3px solid #5b8f6f}
+.tier.t2{border-left:3px solid var(--gold)} .tier.t3{border-left:3px solid #b5503f}
+/* 价格 */
+.price{align-items:center;text-align:center}
+.price .amt{font-family:var(--cn);font-size:200px;line-height:1;color:var(--bone);letter-spacing:.02em;margin:30px 0}
+.price .amt .c{font-size:70px;color:var(--gold);vertical-align:super}
+.price .amt .u{font-size:40px;color:var(--bone2)}
+.price .note{font-family:var(--serif);font-style:italic;font-size:32px;color:var(--bone2)}
+.price .rule2{font-family:var(--cn);font-size:26px;color:var(--gold2);margin-top:26px;letter-spacing:.06em}
+/* 步骤 */
+.steps{display:flex;gap:0;margin-top:60px}
+.step{flex:1;text-align:center;padding:0 30px;position:relative}
+.step:not(:first-child)::before{content:"";position:absolute;left:0;top:46px;width:1px;height:160px;background:var(--line2)}
+.step .roman{font-family:var(--en);font-size:64px;color:var(--gold);margin-bottom:24px}
+.step h4{font-family:var(--cn);font-size:34px;color:var(--bone);margin-bottom:16px;font-weight:500}
+.step p{font-family:var(--serif);font-size:24px;color:var(--bone2);line-height:1.5}
+/* 大列表 */
+.modlist{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 60px;margin-top:50px}
+.mod{display:flex;align-items:baseline;gap:20px;border-bottom:1px solid var(--line2);padding-bottom:18px}
+.mod .ic{font-size:30px;width:46px}
+.mod .t{font-family:var(--cn);font-size:30px;color:var(--bone)}
+.mod .d{font-family:var(--serif);font-size:22px;color:var(--bone3);margin-left:auto}
+/* 引言 */
+.quote{align-items:center;text-align:center;justify-content:center}
+.quote .qm{font-family:var(--en);font-size:160px;color:var(--gold);line-height:.5;opacity:.5;margin-bottom:30px}
+.quote .qt{font-family:var(--cn);font-size:56px;line-height:1.7;color:var(--bone);font-weight:400;max-width:1300px}
+.quote .qt em{font-style:normal;color:var(--gold2);font-weight:500}
+.quote .qs{margin-top:46px;font-family:var(--en);letter-spacing:.5em;font-size:18px;color:var(--bone2)}
+/* CTA */
+.cta{align-items:center;text-align:center;justify-content:center}
+.cta .wx{margin-top:40px;display:inline-block;border:1px solid var(--gold);padding:22px 48px;font-family:var(--sans);font-size:30px;letter-spacing:.1em;color:var(--gold2)}
+.cta .wx b{color:var(--gold);user-select:all}
+/* 导航 */
+.nav{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;z-index:50;
+  background:rgba(7,17,30,.7);border:1px solid var(--line);border-radius:40px;padding:8px 18px;backdrop-filter:blur(8px)}
+.nav button{background:none;border:none;color:var(--gold);font-size:20px;cursor:pointer;padding:4px 10px}
+.nav .ind{font-family:var(--en);font-size:14px;letter-spacing:.2em;color:var(--bone2);min-width:60px;text-align:center}
+@media print{
+  .nav{display:none}
+  .stage{position:static}
+  .deck{transform:none!important}
+  .slide{display:flex!important;position:relative;page-break-after:always;width:1920px;height:1080px}
+}
+</style>
+</head>
+<body>
+<div class="stage"><div class="deck" id="deck">
+
+<!-- 1 封面 -->
+<section class="slide cover active">
+  <div class="mark"><span>FFC</span></div>
+  <h1>财富自由俱乐部</h1>
+  <div class="en">FINANCIAL · FREEDOM · CLUB</div>
+  <div class="tags"><span>AI</span><span>美股</span><span>Web3</span><span>投资</span><span>创业者生态</span></div>
+  <div class="est">介绍 & 使用教学 · EST · MMXXVI</div>
+  <div class="pageno">01</div>
+</section>
+
+<!-- 2 宣言 -->
+<section class="slide quote">
+  <div class="qm">"</div>
+  <div class="qt">财富的本质，是<em>关系的密度</em>。<br/>我们不做流量场，只做<em>圈层筛选</em>。</div>
+  <div class="qs">THE FFC MANIFESTO</div>
+  <div class="brandfoot"><span class="crest">FFC</span>FINANCIAL FREEDOM CLUB</div>
+  <div class="pageno">02</div>
+</section>
+
+<!-- 3 我们是谁 -->
+<section class="slide">
+  <div class="eyebrow">Who We Are</div>
+  <div class="title">一个 <span class="g">高净值认知共同体</span></div>
+  <div class="rule"></div>
+  <div class="grid g3">
+    <div class="card"><div class="num">I</div><h3>一手信息</h3><p>美股 / 港股 / Crypto / 一级市场，机构级研究与一线观点直达。</p></div>
+    <div class="card"><div class="num">II</div><h3>顶级圈层</h3><p>发起人 50W+ 粉丝、九位数 AUM；核心成员遍布硅谷与全球。</p></div>
+    <div class="card"><div class="num">III</div><h3>AI 提效</h3><p>把投研、内容、工具用 AI 武装到牙齿，认知与效率双杀。</p></div>
+  </div>
+  <div class="pageno">03</div>
+</section>
+
+<!-- 4 六度链接 -->
+<section class="slide quote">
+  <div class="eyebrow" style="margin-bottom:50px">The Constellation</div>
+  <div class="qt">加入俱乐部 —<br/>你与<em>明星 · 政商 · 资本 · 高管</em>之间，<br/>只剩<em>六个握手</em>。</div>
+  <div class="qs">SIX DEGREES TO THE WORLD</div>
+  <div class="pageno">04</div>
+</section>
+
+<!-- 5 会员分级 -->
+<section class="slide">
+  <div class="eyebrow">Membership Tiers</div>
+  <div class="title">会员权益 · <span class="g">四档阶梯</span></div>
+  <div class="tiers">
+    <div class="tier t0"><span class="lv">VIP 0</span><span class="nm">入门</span><span class="ds">📚 知识库（科普 · 经典文档 · 财富书单）</span></div>
+    <div class="tier t1"><span class="lv">VIP 1</span><span class="nm">进阶</span><span class="ds">+ 👥 成员资料 + 📊 投研内容（财富日历 / 研报 / 点名追踪 / 标的池）</span></div>
+    <div class="tier t2"><span class="lv">VIP 2</span><span class="nm">实时</span><span class="ds">+ 🐦 推特投研（官方推荐 + 自定义博主，AI 解析立场/置信度）</span></div>
+    <div class="tier t3"><span class="lv">VIP 3</span><span class="nm">顶级</span><span class="ds">+ 💎 付费博主订阅 + 👑 大佬资料 / 引荐背书</span></div>
+  </div>
+  <div class="pageno">05</div>
+</section>
+
+<!-- 6 价格 -->
+<section class="slide price">
+  <div class="eyebrow">Membership</div>
+  <div class="amt"><span class="c">¥</span>2,980<span class="u">/ 年</span></div>
+  <div class="note">"以最克制的价格，进入最稀缺的圈层"</div>
+  <div class="rule2">每加入 10 位新成员 · 价格升至 ¥3,480 —— 早加入，永远更低</div>
+  <div class="pageno">06</div>
+</section>
+
+<!-- 7 产品矩阵（转场到使用教学） -->
+<section class="slide">
+  <div class="eyebrow">The System · 使用教学</div>
+  <div class="title">两个入口，<span class="g">一套系统</span></div>
+  <div class="rule"></div>
+  <div class="grid g2">
+    <div class="card hl"><div class="num">A · 对外</div><h3>🌐 官网</h3><p>老钱风引流门面：关系网络、关键词云、外圈人脉、深度文章、申请入会。<br/><span style="color:var(--gold2)">ff-club-2026.netlify.app</span></p></div>
+    <div class="card hl"><div class="num">B · 对内</div><h3>📚 Notion 知识库</h3><p>会员专属：财富日历、研报、推特投研、智能体、股票课、学员名录 —— 全部在一个空间。</p></div>
+  </div>
+  <div class="pageno">07</div>
+</section>
+
+<!-- 8 Notion 八大模块 -->
+<section class="slide">
+  <div class="eyebrow">Knowledge Base · Notion</div>
+  <div class="title">知识库 · <span class="g">八大模块</span></div>
+  <div class="modlist">
+    <div class="mod"><span class="ic">🤖</span><span class="t">AI 工具教程</span><span class="d">GPT / Claude / 🪜</span></div>
+    <div class="mod"><span class="ic">📚</span><span class="t">Notion 课程导航</span><span class="d">第二大脑</span></div>
+    <div class="mod"><span class="ic">💼</span><span class="t">商业知识库</span><span class="d">标的池/研报/书单/课</span></div>
+    <div class="mod"><span class="ic">📅</span><span class="t">财富日历</span><span class="d">CPI/FOMC/财报季</span></div>
+    <div class="mod"><span class="ic">🎤</span><span class="t">大佬点名追踪</span><span class="d">黄仁勋 × Trump</span></div>
+    <div class="mod"><span class="ic">📈</span><span class="t">生态股价 / 推特投研</span><span class="d">折线图 / AI 解析</span></div>
+    <div class="mod"><span class="ic">🎨</span><span class="t">AI 智能体画廊</span><span class="d">成员调教上架</span></div>
+    <div class="mod"><span class="ic">👥</span><span class="t">学员集合</span><span class="d">问卷/审核/名录</span></div>
+  </div>
+  <div class="pageno">08</div>
+</section>
+
+<!-- 9 亮点功能 -->
+<section class="slide">
+  <div class="eyebrow">Signature Features</div>
+  <div class="title">三个 <span class="g">招牌功能</span></div>
+  <div class="grid g3">
+    <div class="card"><div class="num">★</div><h3>🎤 大佬点名追踪</h3><p>黄仁勋(绿)/Trump(红)/政府(黄) 公开点名哪家公司 + 当时股价反应，每点名 +2 热度。</p></div>
+    <div class="card"><div class="num">★</div><h3>🐦 AI 推特投研</h3><p>把博主推文用 AI 读成结构化投研：标的 + 看多看空 + 置信度 + 公司速读。</p></div>
+    <div class="card"><div class="num">★</div><h3>📈 股票交易小课堂</h3><p>44 节系统课，中文精讲 + 英文原文 + 视频，读完打卡上排行榜。</p></div>
+  </div>
+  <div class="pageno">09</div>
+</section>
+
+<!-- 10 如何加入 -->
+<section class="slide">
+  <div class="eyebrow">How to Join · 使用教学</div>
+  <div class="title">三步 <span class="g">进入 FFC</span></div>
+  <div class="steps">
+    <div class="step"><div class="roman">I</div><h4>提交申请</h4><p>官网点「申请加入」→ 填写 Notion 问卷（含 Notion 邮箱）。</p></div>
+    <div class="step"><div class="roman">II</div><h4>发起人审阅</h4><p>4 位联合发起人共同审阅，48 小时内回复，定 VIP 等级。</p></div>
+    <div class="step"><div class="roman">III</div><h4>入会解锁</h4><p>微信付费 → 邮箱自动邀请进 Notion 空间 → 按等级解锁内容。</p></div>
+  </div>
+  <div class="pageno">10</div>
+</section>
+
+<!-- 11 CTA -->
+<section class="slide cta">
+  <div class="eyebrow">Connecting Top Minds</div>
+  <div class="title" style="text-align:center">链接顶尖智慧 · <span class="g">共创财富未来</span></div>
+  <div class="sub" style="text-align:center">六个人，链接世界上任何人。</div>
+  <div class="wx">申请入会 · 联系微信 <b>YOUR_WECHAT_ID</b></div>
+  <div class="est" style="margin-top:46px;font-family:var(--en);letter-spacing:.5em;color:var(--gold3)">ff-club-2026.netlify.app · EST · MMXXVI</div>
+  <div class="pageno">11</div>
+</section>
+
+</div></div>
+
+<div class="nav">
+  <button id="prev">‹</button>
+  <span class="ind" id="ind">01 / 11</span>
+  <button id="next">›</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];let i=0;
+const ind=document.getElementById('ind');
+function show(n){slides[i].classList.remove('active');i=(n+slides.length)%slides.length;slides[i].classList.add('active');
+  ind.textContent=String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');}
+document.getElementById('next').onclick=()=>show(i+1);
+document.getElementById('prev').onclick=()=>show(i-1);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(i+1);else if(e.key==='ArrowLeft')show(i-1);});
+// 等比缩放 deck 适应窗口
+function fit(){const d=document.getElementById('deck');const s=Math.min(innerWidth/1920,innerHeight/1080);d.style.transform='scale('+s+')';}
+addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>社群操作系统 · 网站 + Notion 组合方案</title>
+<link rel="preconnect" href="https://fonts.loli.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Noto+Serif+SC:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{--ink:#07111E;--ink2:#0E1A2B;--ink3:#15243A;--bone:#F2EBDA;--bone2:#C9BFA8;--bone3:#807660;--gold:#C9A35B;--gold2:#E5C77E;--gold3:#8A6F3A;--line:rgba(201,163,91,.20);--line2:rgba(201,163,91,.08);--cn:'Noto Serif SC',serif;--en:'Cinzel',serif;--serif:'Cormorant Garamond',serif;--sans:'Inter','PingFang SC',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#02060c;color:var(--bone);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.deck{width:1920px;height:1080px;position:relative;transform-origin:center center}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:104px 130px;background:radial-gradient(ellipse at 20% 0%,rgba(201,163,91,.07),transparent 55%),radial-gradient(ellipse at 90% 100%,rgba(30,58,46,.12),transparent 60%),var(--ink);overflow:hidden}
+.slide.active{display:flex;animation:fade .5s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.eyebrow{font-size:20px;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.title{font-family:var(--cn);font-weight:500;font-size:78px;line-height:1.15;letter-spacing:.04em;color:var(--bone)}
+.title .g{background:linear-gradient(180deg,var(--gold2),var(--gold) 50%,var(--gold3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{font-family:var(--serif);font-size:32px;color:var(--bone2);margin-top:24px;line-height:1.5;font-style:italic}
+.rule{height:1px;width:120px;background:linear-gradient(90deg,var(--gold),transparent);margin:34px 0}
+.pageno{position:absolute;bottom:54px;right:70px;font-family:var(--en);font-size:18px;letter-spacing:.3em;color:var(--bone3)}
+.brandfoot{position:absolute;bottom:50px;left:70px;font-family:var(--en);font-size:15px;letter-spacing:.35em;color:var(--gold3)}
+.cover{align-items:center;text-align:center;justify-content:center}
+.cover .kick{font-family:var(--en);font-size:22px;letter-spacing:.5em;color:var(--gold);margin-bottom:30px}
+.cover h1{font-family:var(--cn);font-weight:600;font-size:104px;letter-spacing:.08em;background:linear-gradient(180deg,var(--gold2),var(--gold) 45%,var(--gold3));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cover .en{font-family:var(--en);font-size:22px;letter-spacing:.45em;color:var(--bone2);margin:26px 0 30px}
+.cover .sub{text-align:center}
+.grid{display:grid;gap:26px;margin-top:42px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);background:linear-gradient(180deg,var(--ink2),var(--ink));padding:34px 32px}
+.card.hl{border-color:var(--gold)}
+.card .ic{font-size:34px;margin-bottom:14px}
+.card .num{font-family:var(--en);color:var(--gold);font-size:18px;letter-spacing:.25em;margin-bottom:14px}
+.card h3{font-family:var(--cn);font-size:30px;color:var(--bone);margin-bottom:10px;font-weight:500}
+.card p{font-family:var(--serif);font-size:23px;line-height:1.5;color:var(--bone2)}
+/* 架构图 */
+.arch{display:flex;align-items:center;justify-content:center;gap:0;margin-top:60px}
+.arch .box{flex:1;border:1px solid var(--gold3);background:var(--ink2);padding:44px 34px;text-align:center}
+.arch .box.b1{border-color:var(--gold)}
+.arch .box h3{font-family:var(--cn);font-size:34px;color:var(--bone);margin-bottom:12px}
+.arch .box p{font-family:var(--serif);font-size:22px;color:var(--bone2);line-height:1.45}
+.arch .mid{flex:0 0 200px;text-align:center;color:var(--gold)}
+.arch .mid .a{font-size:40px;line-height:1}
+.arch .mid .l{font-family:var(--sans);font-size:16px;letter-spacing:.15em;color:var(--gold2);margin-top:10px}
+/* 价值条 */
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:50px}
+.stat .s{border:1px solid var(--line);background:var(--ink2);padding:36px;text-align:center}
+.stat .s .v{font-family:var(--cn);font-size:64px;color:var(--gold2);line-height:1}
+.stat .s .k{font-family:var(--serif);font-size:24px;color:var(--bone2);margin-top:12px}
+.quote{align-items:center;text-align:center;justify-content:center}
+.quote .qt{font-family:var(--cn);font-size:56px;line-height:1.6;color:var(--bone);max-width:1350px}
+.quote .qt em{font-style:normal;color:var(--gold2)}
+.biz{display:flex;flex-direction:column;gap:18px;margin-top:44px}
+.biz .b{display:flex;align-items:center;gap:30px;border:1px solid var(--line);background:var(--ink2);padding:26px 38px}
+.biz .b .t{font-family:var(--cn);font-size:30px;color:var(--gold2);width:260px;flex-shrink:0}
+.biz .b .d{font-family:var(--serif);font-size:25px;color:var(--bone2)}
+.cta{align-items:center;text-align:center;justify-content:center}
+.cta .wx{margin-top:36px;display:inline-block;border:1px solid var(--gold);padding:20px 46px;font-family:var(--sans);font-size:28px;letter-spacing:.1em;color:var(--gold2)}
+.cta .wx b{color:var(--gold);user-select:all}
+.nav{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;z-index:50;background:rgba(7,17,30,.7);border:1px solid var(--line);border-radius:40px;padding:8px 18px;backdrop-filter:blur(8px)}
+.nav button{background:none;border:none;color:var(--gold);font-size:20px;cursor:pointer;padding:4px 10px}
+.nav .ind{font-family:var(--en);font-size:14px;letter-spacing:.2em;color:var(--bone2);min-width:60px;text-align:center}
+@media print{.nav{display:none}.stage{position:static}.deck{transform:none!important}.slide{display:flex!important;position:relative;page-break-after:always}}
+</style>
+</head>
+<body>
+<div class="stage"><div class="deck" id="deck">
+
+<!-- 1 封面 -->
+<section class="slide cover active">
+  <div class="kick">COMMUNITY OS</div>
+  <h1>社群操作系统</h1>
+  <div class="en">WEBSITE · + · NOTION</div>
+  <div class="sub">为知识付费社群，搭一套「门面官网 + Notion 中台」组合方案</div>
+  <div class="brandfoot">A PROPOSAL · BY DAVID 小鱼</div>
+  <div class="pageno">01</div>
+</section>
+
+<!-- 2 问题 -->
+<section class="slide">
+  <div class="eyebrow">The Problem</div>
+  <div class="title">知识付费社群的 <span class="g">四个痛点</span></div>
+  <div class="grid g2">
+    <div class="card"><div class="ic">🪧</div><h3>没门面</h3><p>只有微信群，没有体面的对外窗口，招不来高质量成员。</p></div>
+    <div class="card"><div class="ic">🗂️</div><h3>内容散</h3><p>资料散在群文件、网盘、文档里，找不到、沉不下来。</p></div>
+    <div class="card"><div class="ic">🔒</div><h3>权限难管</h3><p>不同付费档位看不同内容，纯靠人工，一多就乱。</p></div>
+    <div class="card"><div class="ic">💸</div><h3>变现单一</h3><p>一次性门槛费收完就结束，没有持续的分级与续费。</p></div>
+  </div>
+  <div class="pageno">02</div>
+</section>
+
+<!-- 3 方案 -->
+<section class="slide quote">
+  <div class="eyebrow" style="margin-bottom:46px">The Solution</div>
+  <div class="qt">一套<em>门面官网</em>负责引流与筛选，<br/>一套 <em>Notion 中台</em>负责内容、会员与权限，<br/>中间用<em>自动化</em>打通 —— <em>零运维</em>。</div>
+  <div class="pageno">03</div>
+</section>
+
+<!-- 4 架构图 -->
+<section class="slide">
+  <div class="eyebrow">Architecture</div>
+  <div class="title">组合架构 · <span class="g">一图看懂</span></div>
+  <div class="arch">
+    <div class="box b1"><h3>🌐 官网</h3><p>对外门面<br/>引流 · 筛选 · 申请漏斗</p></div>
+    <div class="mid"><div class="a">⇄</div><div class="l">GITHUB ACTION<br/>自动同步</div></div>
+    <div class="box"><h3>📚 Notion 中台</h3><p>对内中枢<br/>内容 · 会员 CRM · 权限</p></div>
+  </div>
+  <div class="sub" style="text-align:center;margin-top:50px">在 Notion 写 → 自动同步 → 官网更新。无服务器、无数据库、无运维。</div>
+  <div class="pageno">04</div>
+</section>
+
+<!-- 5 对外官网 -->
+<section class="slide">
+  <div class="eyebrow">Front · 对外</div>
+  <div class="title">门面官网 · <span class="g">把圈层做成视觉</span></div>
+  <div class="grid g4">
+    <div class="card"><div class="ic">🕸️</div><h3>关系网络</h3><p>发起人居中、成员环列的圈层星图。</p></div>
+    <div class="card"><div class="ic">🔤</div><h3>关键词云</h3><p>按成员领域加权，一眼看懂圈层调性。</p></div>
+    <div class="card"><div class="ic">📰</div><h3>研报钩子</h3><p>露标题摘要、锁全文，勾人入会。</p></div>
+    <div class="card"><div class="ic">📝</div><h3>申请漏斗</h3><p>问卷 → 审核看板，转化可追踪。</p></div>
+  </div>
+  <div class="pageno">05</div>
+</section>
+
+<!-- 6 对内中台 -->
+<section class="slide">
+  <div class="eyebrow">Back · 对内</div>
+  <div class="title">Notion 中台 · <span class="g">内容 + CRM</span></div>
+  <div class="grid g3">
+    <div class="card"><div class="ic">📅</div><h3>内容矩阵</h3><p>知识库 / 财富日历 / 研报 / 课程 / 智能体，全在一个空间。</p></div>
+    <div class="card"><div class="ic">👥</div><h3>会员 CRM</h3><p>申请审核看板、VIP 分级、邮箱归集、自动邀请清单。</p></div>
+    <div class="card"><div class="ic">🤖</div><h3>AI 增值</h3><p>推特投研、点名追踪、AI 智能体 —— 差异化护城河。</p></div>
+  </div>
+  <div class="pageno">06</div>
+</section>
+
+<!-- 7 分级变现 -->
+<section class="slide">
+  <div class="eyebrow">Monetization</div>
+  <div class="title">分级变现 · <span class="g">从一次性到持续</span></div>
+  <div class="biz">
+    <div class="b"><span class="t">VIP 阶梯</span><span class="d">VIP0→3 不同付费档解锁不同内容，自然向上付费。</span></div>
+    <div class="b"><span class="t">动态定价</span><span class="d">每加入 N 人涨价，制造稀缺与早鸟动机。</span></div>
+    <div class="b"><span class="t">续费 + 分润</span><span class="d">年费续费 + 顶级会员引荐大佬分润，收入多元。</span></div>
+  </div>
+  <div class="pageno">07</div>
+</section>
+
+<!-- 8 成本 -->
+<section class="slide">
+  <div class="eyebrow">Cost Structure</div>
+  <div class="title">成本结构 · <span class="g">近乎零运维</span></div>
+  <div class="stat">
+    <div class="s"><div class="v">¥0</div><div class="k">官网托管<br/>Netlify / Vercel 免费</div></div>
+    <div class="s"><div class="v">¥0</div><div class="k">自动同步<br/>GitHub Actions 免费</div></div>
+    <div class="s"><div class="v">低</div><div class="k">内容中台<br/>Notion 订阅即可</div></div>
+  </div>
+  <div class="sub" style="text-align:center;margin-top:46px">没有服务器、没有后端、没有数据库 —— 一个人就能维护一个几百人的付费社群。</div>
+  <div class="pageno">08</div>
+</section>
+
+<!-- 9 案例 -->
+<section class="slide">
+  <div class="eyebrow">Case Study</div>
+  <div class="title">已落地案例 · <span class="g">财富自由俱乐部</span></div>
+  <div class="grid g4">
+    <div class="card hl"><div class="num">官网</div><h3>老钱风门面</h3><p>关系网 + 研报 + 推特投研，已上线。</p></div>
+    <div class="card hl"><div class="num">中台</div><h3>8 大模块</h3><p>日历/点名/股价/课程/CRM 全跑通。</p></div>
+    <div class="card hl"><div class="num">自动化</div><h3>同步管道</h3><p>Notion 写 → 自动部署，已验证。</p></div>
+    <div class="card hl"><div class="num">变现</div><h3>VIP 分级</h3><p>¥2980/年 + 动态定价，已设。</p></div>
+  </div>
+  <div class="pageno">09</div>
+</section>
+
+<!-- 10 为什么是我们 -->
+<section class="slide">
+  <div class="eyebrow">Why Us</div>
+  <div class="title">交付方 · <span class="g">David 小鱼 · AI Builder</span></div>
+  <div class="grid g3">
+    <div class="card"><div class="ic">⚙️</div><h3>全栈交付</h3><p>网站开发 + Notion 系统 + 自动化，一个人闭环。</p></div>
+    <div class="card"><div class="ic">🧠</div><h3>精通 AI</h3><p>把 AI 投研、智能体、内容生产嵌进社群，做出别人没有的功能。</p></div>
+    <div class="card"><div class="ic">✅</div><h3>已验证</h3><p>FFC 是亲手跑通的样板，不是 PPT 概念。</p></div>
+  </div>
+  <div class="pageno">10</div>
+</section>
+
+<!-- 11 商业模式 -->
+<section class="slide">
+  <div class="eyebrow">Business Model</div>
+  <div class="title">合作模式 · <span class="g">给其他社群搭建</span></div>
+  <div class="biz">
+    <div class="b"><span class="t">建站交付费</span><span class="d">一次性搭好官网 + Notion 中台 + 自动化管道。</span></div>
+    <div class="b"><span class="t">年度维护</span><span class="d">持续迭代、功能升级、技术保障。</span></div>
+    <div class="b"><span class="t">收入分成 / 投资</span><span class="d">深度绑定的社群，可谈营收分成或股权合作。</span></div>
+  </div>
+  <div class="pageno">11</div>
+</section>
+
+<!-- 12 CTA -->
+<section class="slide cta">
+  <div class="eyebrow">Let's Build</div>
+  <div class="title" style="text-align:center">为你的社群 · <span class="g">搭一套同样的系统</span></div>
+  <div class="sub" style="text-align:center">合作 / 投资洽谈</div>
+  <div class="wx">联系微信 <b>dragon-yu-171728</b></div>
+  <div class="brandfoot">DAVID 小鱼 · AI BUILDER · EST MMXXVI</div>
+  <div class="pageno">12</div>
+</section>
+
+</div></div>
+<div class="nav"><button id="prev">‹</button><span class="ind" id="ind">01 / 12</span><button id="next">›</button></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let i=0;const ind=document.getElementById('ind');
+function show(n){slides[i].classList.remove('active');i=(n+slides.length)%slides.length;slides[i].classList.add('active');ind.textContent=String(i+1).padStart(2,'0')+' / '+String(slides.length).padStart(2,'0');}
+document.getElementById('next').onclick=()=>show(i+1);document.getElementById('prev').onclick=()=>show(i-1);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')show(i+1);else if(e.key==='ArrowLeft')show(i-1);});
+function fit(){const d=document.getElementById('deck');const s=Math.min(innerWidth/1920,innerHeight/1080);d.style.transform='scale('+s+')';}
+addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>
